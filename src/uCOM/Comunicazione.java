@@ -14,6 +14,30 @@ public class Comunicazione {
 		this.corpo 		= corpo;
 	}
 	
+	public String getOggetto() {
+		return oggetto;
+	}
+
+
+
+	public void setOggetto(String oggetto) {
+		this.oggetto = oggetto;
+	}
+
+
+
+	public String getCorpo() {
+		return corpo;
+	}
+
+
+
+	public void setCorpo(String corpo) {
+		this.corpo = corpo;
+	}
+
+
+
 	public String toString()
 	{
 		String s = new String("Oggetto: " + oggetto +"\n");

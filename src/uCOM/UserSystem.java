@@ -14,8 +14,39 @@ public class UserSystem {
 	 */
 	public void avviaServizi(Ruolo ruoloUtente)
 	{
-		servizio = new StudentService();
+		switch(ruoloUtente) 
+		{
+			case SYSTEMADMIN:
+				servizio = new SysAdminService();
+				break;
+			case AMMINISTRATORE:
+				servizio = new AdminService();
+				break;				
+			default:
+				servizio = new StudentService();
+		}
 		servizio.start();
 	}
+	
+	public boolean mostraMenu() {
+		return servizio.mostraMenu();
+	}
 
+	/**
+	 * Logout: viene smontato il service
+	 */
+	public void logout() {
+		servizio = null;
+	}
+
+	public UserService getServizio() {
+		return servizio;
+	}
+
+	public void setServizio(UserService servizio) {
+		this.servizio = servizio;
+	}
+
+	
+	
 }

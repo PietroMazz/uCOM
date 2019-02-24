@@ -6,9 +6,8 @@ package ui;
  */
 public class MenuConsole implements MenuUI {
 
-	public void mostraMenu()
+	public boolean mostraMenu()
 	{
-		System.out.println("Avvio nuova comunicazione...");
-		System.out.print("\n\n\n");
+		return false;
 	}
 }

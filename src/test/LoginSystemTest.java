@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import uCOM.DatiLogin;
+import uCOM.DatiUtente;
 import uCOM.LoginSystem;
 import uCOM.Ruolo;
 
@@ -27,13 +28,31 @@ class LoginSystemTest {
 	 * Test method for {@link uCOM.LoginSystem#verificaCredenziali(uCOM.DatiLogin)}.
 	 */
 	@Test
-	void testVerificaCredenziali() {
-		DatiLogin datiTest = new DatiLogin("prova", "prova");
+	void testCredenziali() {	
 		
-		Ruolo r = loginTest.verificaCredenziali(datiTest);
+		DatiUtente s = new DatiUtente("s", Ruolo.STUDENTE);
+		DatiUtente a = new DatiUtente("a", Ruolo.AMMINISTRATORE);
+		DatiUtente sa = new DatiUtente("sa", Ruolo.SYSTEMADMIN);
+		loginTest.creaUtente(s);
+		loginTest.creaUtente(a);
+		loginTest.creaUtente(sa);
 		
-		assertEquals(r, Ruolo.STUDENTE);
+		DatiLogin datiTest;
+		Ruolo role;		
 		
-	}
+		datiTest = new DatiLogin("s", "test");
+		role = loginTest.verificaCredenziali(datiTest);
+		assertEquals(Ruolo.STUDENTE, role);
+		
+		datiTest = new DatiLogin("a", "test");
+		role = loginTest.verificaCredenziali(datiTest);
+		assertEquals(Ruolo.AMMINISTRATORE, role);
+		
+		datiTest = new DatiLogin("sa", "test");
+		role = loginTest.verificaCredenziali(datiTest);
+		assertEquals(Ruolo.SYSTEMADMIN, role);
+		
+		
+	}	
 
 }

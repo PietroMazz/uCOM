@@ -6,11 +6,18 @@ package uCOM;
  *
  */
 public abstract class Utente {
-	private String 	username;
-	private Ruolo 	ruolo;
-	private Sistema sistema;
-	
-	public abstract void scegliOperazione();
+	private	 String 	username;
+	private  Ruolo 		ruolo;
+	private	 Sistema 	sistema = Sistema.getIstanza();
+		
+	/**
+	 * L'utente seleziona l'operazione da eseguire
+	 * @return TODO
+	 */
+	public boolean scegliOperazione()
+	{
+		return sistema.mostraMenu();
+	}
 	
 	public String getUsername() {
 		return username;

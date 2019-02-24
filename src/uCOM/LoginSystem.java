@@ -2,6 +2,8 @@ package uCOM;
 
 import ui.LoginConsole;
 import ui.LoginUI;
+import ui.NotifyConsoleUI;
+import util.Status;
 
 /**
  * @author Pietro
@@ -9,10 +11,12 @@ import ui.LoginUI;
  */
 public class LoginSystem {
 	
-	private LoginUI loginUI;
+	private RegistroUtenti	registroUtenti;
+	private LoginUI 		loginUI;
 	
 	public LoginSystem() {
 		loginUI = new LoginConsole();
+		registroUtenti = new RegistroUtenti();
 	}
 	
 	/**
@@ -25,9 +29,26 @@ public class LoginSystem {
 		
 		Ruolo ruoloUtente = verificaCredenziali(datiLogin);
 		
+		if (ruoloUtente == null) 
+		{
+			NotifyConsoleUI.notificaErrore("Dati login errati o impossibile accedere al momento");
+			return null;
+		}
+	
 		Sistema.getIstanza().avviaServizi(ruoloUtente);
 		
-		return new Studente( datiLogin.getUsername() );
+		switch(ruoloUtente)
+		{
+		case AMMINISTRATORE:
+			return new Amministratore( datiLogin.getUsername() );
+		case SYSTEMADMIN:
+			return new SystemAdmin( datiLogin.getUsername() );
+		case STUDENTE:
+			return new Studente( datiLogin.getUsername() );
+		default:
+			return null;
+		}
+		
 	}
 	
 	/**
@@ -37,7 +58,22 @@ public class LoginSystem {
 	 */
 	public Ruolo verificaCredenziali (DatiLogin dl)
 	{
-		return Ruolo.STUDENTE;
+		Boolean wrongPassword = (dl.getPassword().compareTo("test") != 0);
+		
+		if(wrongPassword) return null;
+		
+		String user = dl.getUsername();
+		Ruolo ruolo = registroUtenti.getRoleForUser(user);
+		if(ruolo == null) return null;
+		return ruolo;
+	}
+
+	/**
+	 * Crea utente per il System Admin
+	 * @param du
+	 */
+	public Status creaUtente(DatiUtente du) {
+		return registroUtenti.add(du);		
 	}
 
 }

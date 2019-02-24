@@ -11,16 +11,19 @@ public class uCOM {
 		
 	public static void main(String[] args)
 	{
-		// Start & login
-		Utente user = Sistema.getIstanza().login();
+		Sistema s = Sistema.getIstanza();
 		
-		// Avvio servizi
-		Sistema.getIstanza().avviaServizi(user.getRuolo());
-
-		// Operazioni fino alla chiusura dell'App
+		s.startup();
+		
 		while(true)
 		{
-			user.scegliOperazione();	
+			// Start & login
+			Utente user = s.login();		
+			
+			// Operazioni fino alla chiusura dell'App
+			if(user != null) user.scegliOperazione();	
+			
+			s.logout();
 		}
 	}
 	

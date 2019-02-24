@@ -23,17 +23,30 @@ public class Sistema {
 	}
 	
 	// SINGLETON
-		private static Sistema istanza;
-		
-		public static synchronized Sistema getIstanza()
+	private static Sistema istanza;
+	
+	public static synchronized Sistema getIstanza()
+	{
+		if ( istanza == null)
 		{
-			if ( istanza == null)
-			{
-				istanza = new Sistema();
-			}
-			return istanza;
+			istanza = new Sistema();
 		}
+		return istanza;
+	}
 	////////////
+		
+	/**
+	 * Metodo di startup del sistema per utilizzo dei dati in memoria: vengono aggiunti utenti di base
+	 */
+	public void startup()
+	{
+		DatiUtente sysadmin = new DatiUtente("sysadmin", 	Ruolo.SYSTEMADMIN);
+		DatiUtente admin 	= new DatiUtente("admin", 		Ruolo.AMMINISTRATORE);
+		DatiUtente studente = new DatiUtente("student",		Ruolo.STUDENTE);
+		loginSystem.creaUtente(sysadmin);
+		loginSystem.creaUtente(admin);
+		loginSystem.creaUtente(studente);
+	}
 				
 		
 	/**
@@ -59,8 +72,48 @@ public class Sistema {
 	 * @param c comunicazione da inviare
 	 * @return SUCCESS/FAIL
 	 */
-	public Status inviaComunicazione(Comunicazione c)
+	public Status elaboraComunicazione(Comunicazione c)
 	{
-		return messagingSystem.elaboraComunicazione(c);
+		try {			
+			messagingSystem.elaboraComunicazione(c);
+		} catch(Exception e)
+		{
+			return Status.FAIL;
+		}
+		return Status.SUCCESS;
+	}
+	
+	public Status elaboraAvviso(Avviso a)
+	{
+		try {			
+			messagingSystem.elaboraAvviso(a);
+		} catch(Exception e)
+		{
+			return Status.FAIL;
+		}
+		return Status.SUCCESS;
+	}
+	
+	
+	public boolean mostraMenu()
+	{
+		return userSystem.mostraMenu();
+	}
+
+
+	/**
+	 * Crea utente per il SystemAdmin
+	 * @param du
+	 */
+	public Status creaUtente(DatiUtente du) {
+		return loginSystem.creaUtente(du);		
+	}
+
+	/**
+	 * 
+	 */
+	public void logout() {
+		userSystem.logout();
+		
 	}
 }

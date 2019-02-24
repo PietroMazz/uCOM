@@ -1,7 +1,8 @@
 package uCOM;
 
-import ui.ComunicazioneConsoleInput;
-import ui.ComunicazioneInput;
+import ui.InputConsoleUI;
+import ui.NotifyConsoleUI;
+import util.Nomi;
 import util.Status;
 
 /**
@@ -10,44 +11,32 @@ import util.Status;
  */
 public class Studente extends Utente {
 	
-	private final 	Ruolo 	ruolo = Ruolo.STUDENTE;
-	
+	private final 	Ruolo 	ruolo	= Ruolo.STUDENTE;
+	private 		Sistema	sistema = Sistema.getIstanza();
+
 	private 		String 	username;
-	private 		Sistema	sistema;
+	
 	
 	private Comunicazione comunicazioneInCorso; 
 	
 	public Studente(String user)
 	{
-		this.username 	= user;
-		this.sistema 	= Sistema.getIstanza();
+		username 	= user;
 	}
 	
-	/**
-	 * L'utente seleziona l'operazione da eseguire
-	 */
-	public void scegliOperazione()
-	{
-		avviaComunicazione();
-	}
-	
-
 	/**
 	 * Inizia l'operazione per inviare una comunicazione
 	 */
 	public void avviaComunicazione()
 	{
-		creaComunicazione();
-		Status result = inviaComunicazione(comunicazioneInCorso);	
+		comunicazioneInCorso = creaComunicazione();
+		Status result 		 = inviaComunicazione(comunicazioneInCorso);	
 		
-		// TODO : DA RIVEDERE ASSOLUTAMENTE
-		if(result == Status.SUCCESS)
-		{
-			System.out.println("Successo");
-			// cleanup
-			comunicazioneInCorso = null;		
-		}
-		
+		if(result == Status.SUCCESS) NotifyConsoleUI.notificaSuccesso();
+		else NotifyConsoleUI.notificaErrore("Impossibile inviare comunicazione");
+			
+		// cleanup
+		comunicazioneInCorso = null;		
 	}
 	
 	/**
@@ -55,19 +44,62 @@ public class Studente extends Utente {
 	 */
 	public Status inviaComunicazione(Comunicazione c)
 	{
-		return sistema.inviaComunicazione(comunicazioneInCorso);	
+		return sistema.elaboraComunicazione(comunicazioneInCorso);	
 		
 	}
 	
-	public void creaComunicazione()
-	{
-		// TODO: da rivedere
-		ComunicazioneInput ci = new ComunicazioneConsoleInput();
+	public Comunicazione creaComunicazione()
+	{		
+		String oggetto 	= InputConsoleUI.inserisciStringa(Nomi.OGGETTO);
+		String corpo 	= InputConsoleUI.inserisciStringa(Nomi.CORPO);
 		
-		String oggetto 	= ci.inserisciOggetto();
-		String corpo 	= ci.inserisciCorpo();
-		
-		comunicazioneInCorso = new Comunicazione(oggetto, corpo);		
+		return new Comunicazione(oggetto, corpo);		
 	}
+	
+	@Override
+	public boolean scegliOperazione()
+	{
+		if(!super.scegliOperazione())
+		{
+			Integer scelta;
+			do {
+				scelta = InputConsoleUI.inserisciIntero(0,1);
+				switch(scelta)
+				{
+				case 0:
+					return true;
+				case 1:
+					avviaComunicazione();
+					break;
+				default:
+					continue;
+				}
+				sistema.mostraMenu();
+			} while(true);
+		}
+		return true;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Comunicazione getComunicazioneInCorso() {
+		return comunicazioneInCorso;
+	}
+
+	public void setComunicazioneInCorso(Comunicazione comunicazioneInCorso) {
+		this.comunicazioneInCorso = comunicazioneInCorso;
+	}
+
+	public Ruolo getRuolo() {
+		return ruolo;
+	}
+	
+	
 	
 }

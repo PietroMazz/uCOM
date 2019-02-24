@@ -7,8 +7,8 @@ import ui.MenuUI;
  * @author Pietro
  *
  */
-public class StudentService implements UserService {
-		
+public class AdminService implements UserService {
+
 	private MenuUI menuUI = new MenuConsole(); 
 	
 	public void start()
@@ -19,14 +19,11 @@ public class StudentService implements UserService {
 	{
 		if (!menuUI.mostraMenu())
 		{
-			System.out.println("1. Invia comunicazione.");
+			System.out.println("1. Invia avviso.");
 			System.out.println("0. Termina.");
 			return false;
 		}
 		return true;
 	}
-	
-	
-	
 	
 }
