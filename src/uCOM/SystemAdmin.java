@@ -1,6 +1,7 @@
 package uCOM;
 
 import ui.InputConsoleUI;
+import ui.InputSwingUI;
 import ui.NotifyConsoleUI;
 import util.Nomi;
 import util.Status;
@@ -37,7 +38,7 @@ public class SystemAdmin extends Utente {
 	 */
 	private DatiUtente inserisciDatiUtente() {
 		String username = InputConsoleUI.inserisciStringa(Nomi.USERNAME);
-		Ruolo  ruolo 	= InputConsoleUI.inserisciRuolo();
+		Ruolo  ruolo 	= InputSwingUI.inserisciRuolo();
 		DatiUtente du	= new DatiUtente(username, ruolo);
 		return du;
 	}

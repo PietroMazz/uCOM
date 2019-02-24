@@ -13,6 +13,9 @@ public class Nomi {
 	public static final String TITOLO 	= "titolo";
 	public static final String DETTAGLI = "dettagli";
 	public static final String RUOLO = "ruolo";
+	public static final String STUDENTE = "studente";
+	public static final String AMMINISTRATORE = "amministratore";
+	public static final String SYSTEMADMIN = "system admin";
 	
 	
 

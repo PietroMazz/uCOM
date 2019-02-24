@@ -1,8 +1,9 @@
 package uCOM;
 
-import ui.LoginConsole;
+import ui.LoginSwing;
 import ui.LoginUI;
 import ui.NotifyConsoleUI;
+import util.ExitException;
 import util.Status;
 
 /**
@@ -15,7 +16,7 @@ public class LoginSystem {
 	private LoginUI 		loginUI;
 	
 	public LoginSystem() {
-		loginUI = new LoginConsole();
+		loginUI = new LoginSwing();
 		registroUtenti = new RegistroUtenti();
 	}
 	
@@ -23,7 +24,7 @@ public class LoginSystem {
 	 * Avvia la schermata di login e permette l'inserimento dei dati
 	 * @return utente risultante dal login
 	 */
-	public Utente login()
+	public Utente login () throws ExitException
 	{
 		DatiLogin 	datiLogin 	= loginUI.richiediDatiLogin();
 		

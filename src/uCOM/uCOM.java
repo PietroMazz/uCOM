@@ -1,5 +1,7 @@
 package uCOM;
 
+import util.ExitException;
+
 /**
  * Classe del main, che avvia il software
  * 
@@ -11,19 +13,26 @@ public class uCOM {
 		
 	public static void main(String[] args)
 	{
-		Sistema s = Sistema.getIstanza();
-		
-		s.startup();
-		
-		while(true)
+		try
 		{
-			// Start & login
-			Utente user = s.login();		
+			Sistema s = Sistema.getIstanza();
 			
-			// Operazioni fino alla chiusura dell'App
-			if(user != null) user.scegliOperazione();	
+			s.startup();
 			
-			s.logout();
+			while(true)
+			{
+				// Start & login
+				Utente user = s.login();		
+				
+				// Operazioni fino alla chiusura dell'App
+				if(user != null) user.scegliOperazione();	
+				
+				s.logout();
+			}			
+		}
+		catch (ExitException e)
+		{
+			System.exit(0);
 		}
 	}
 	

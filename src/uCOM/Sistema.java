@@ -1,5 +1,6 @@
 package uCOM;
 
+import util.ExitException;
 import util.Status;
 
 /**
@@ -53,7 +54,7 @@ public class Sistema {
 	 * Avvia il sistema, richiedendo l'autenticazione dell'utente
 	 * @return utente istanziato dal login
 	 */
-	public Utente login()
+	public Utente login() throws ExitException
 	{
 		Utente u = loginSystem.login();
 		return u;
