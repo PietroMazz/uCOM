@@ -20,6 +20,7 @@ public class AdminService implements UserService {
 		if (!menuUI.mostraMenu())
 		{
 			System.out.println("1. Invia avviso.");
+			System.out.println("2. Aggiungi corso.");
 			System.out.println("0. Termina.");
 			return false;
 		}

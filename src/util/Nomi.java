@@ -16,6 +16,16 @@ public class Nomi {
 	public static final String STUDENTE = "studente";
 	public static final String AMMINISTRATORE = "amministratore";
 	public static final String SYSTEMADMIN = "system admin";
+	public static final String PRANZO = "pranzo";
+	public static final String CENA = "cena";
+	public static final String PRIMO = "primo";
+	public static final String SECONDO = "secondo";
+	public static final String CORSO = "corso";
+	public static final String DESCRIZIONE = "descrizione";
+	public static final String TIPOPRENOTAZIONE = "tipo prenotazione pasto";
+	
+	
+	
 	
 	
 

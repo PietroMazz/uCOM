@@ -15,12 +15,14 @@ public class Sistema {
 	private LoginSystem 	loginSystem;
 	private UserSystem 		userSystem;	
 	private MessagingSystem messagingSystem;
+	private CateringService cateringService;
 	
 	private Sistema()
 	{
 		loginSystem 	= new LoginSystem();
 		userSystem 		= new UserSystem();
 		messagingSystem = new MessagingSystem();
+		cateringService = new FakeCateringAdapter();
 	}
 	
 	// SINGLETON
@@ -116,5 +118,28 @@ public class Sistema {
 	public void logout() {
 		userSystem.logout();
 		
+	}
+
+	/**
+	 * @param tp
+	 * @return
+	 */
+	public Menu indicaTipoPrenotazione(TipoPrenotazione tp) {
+		return cateringService.indicaTipoPrenotazione(tp);
+	}
+
+	/**
+	 * @param pp
+	 */
+	public Status elaboraPrenotazionePasto(PrenotazionePasto pp) {
+		return cateringService.elaboraPrenotazione(pp);
+	}
+
+	/**
+	 * @param c
+	 * @return
+	 */
+	public Status creaCorso(Corso c) {
+		return userSystem.creaCorso(c);
 	}
 }

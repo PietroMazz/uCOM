@@ -36,6 +36,10 @@ public class Amministratore extends Utente {
 		else NotifyConsoleUI.notificaErrore("Impossibile inviare avviso");
 	}
 	
+	/**
+	 * Richiede input per creazione avvis
+	 * @return nuovo avviso
+	 */
 	public Avviso creaAvviso()
 	{
 		String titolo 	= InputConsoleUI.inserisciStringa(Nomi.TITOLO);
@@ -44,11 +48,49 @@ public class Amministratore extends Utente {
 		return new Avviso(titolo, dettagli);	
 	}
 	
+	/**
+	 * Invia l'Avviso a al Sistema 
+	 * @param a
+	 * @return esito operazione
+	 */
 	public Status inviaAvviso(Avviso a)
 	{
 		return sistema.elaboraAvviso(a);
 	}
 	
+	/**
+	 * Avvia l'operazione per aggiungere un corso
+	 */
+	public void aggiungiCorso()
+	{
+		Corso c = inserisciDatiCorso();
+		Status s = creaCorso(c);
+		
+		if(s == Status.SUCCESS) NotifyConsoleUI.notificaSuccesso();
+		else NotifyConsoleUI.notificaErrore("Impossibile aggiungere utente");
+	}
+	
+	/**
+	 * @param c
+	 * @return
+	 */
+	public Status creaCorso(Corso c) {
+		return sistema.creaCorso(c);
+	}
+
+
+	/**
+	 * Richiede input per creazione corso
+	 * @return
+	 */
+	private Corso inserisciDatiCorso() {
+		String nome = InputConsoleUI.inserisciStringa(Nomi.CORSO);
+		String descrizione = InputConsoleUI.inserisciStringa(Nomi.DESCRIZIONE);
+		
+		return new Corso(nome, descrizione);
+	}
+
+
 	@Override
 	public boolean scegliOperazione()
 	{
@@ -56,13 +98,16 @@ public class Amministratore extends Utente {
 		{
 			Integer scelta;
 			do {
-				scelta = InputConsoleUI.inserisciIntero(0,1);
+				scelta = InputConsoleUI.inserisciIntero(0,2);
 				switch(scelta)
 				{
 				case 0:
 					return true;
 				case 1:
 					avviaAvviso();
+					break;
+				case 2:
+					aggiungiCorso();
 					break;
 				default:
 					continue;

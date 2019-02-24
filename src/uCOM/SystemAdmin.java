@@ -43,7 +43,7 @@ public class SystemAdmin extends Utente {
 		return du;
 	}
 	
-	private Status creaUtente(DatiUtente du)
+	public Status creaUtente(DatiUtente du)
 	{
 		return sistema.creaUtente(du);
 	}

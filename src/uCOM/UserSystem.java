@@ -1,12 +1,19 @@
 package uCOM;
 
+import util.Status;
+
 /**
  * @author Pietro
  *
  */
 public class UserSystem {
 	
+	private RegistroCorsi registro;
 	private UserService servizio;
+	
+	public UserSystem() {
+		registro = new RegistroCorsi();
+	}
 	
 	/**
 	 * Crea l'istanza del servizio sulla base dell'utente e lo avvia
@@ -45,6 +52,14 @@ public class UserSystem {
 
 	public void setServizio(UserService servizio) {
 		this.servizio = servizio;
+	}
+
+	/**
+	 * @param c
+	 * @return
+	 */
+	public Status creaCorso(Corso c) {
+		return registro.add(c);
 	}
 
 	

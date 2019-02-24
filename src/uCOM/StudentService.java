@@ -20,6 +20,7 @@ public class StudentService implements UserService {
 		if (!menuUI.mostraMenu())
 		{
 			System.out.println("1. Invia comunicazione.");
+			System.out.println("2. Prenota pasto.");
 			System.out.println("0. Termina.");
 			return false;
 		}

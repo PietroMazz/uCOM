@@ -42,10 +42,11 @@ public class InputConsoleUI {
 				System.out.println("Inserisci intero compreso tra " + min + " e " + max +":");
 			try {
 				i = scanner.nextInt();			
+				if(i>max || i<min) throw new Exception();
 				break;
 			} catch(Exception e){
 				scanner.nextLine();
-				System.out.println("Si prega di inserire un intero. Riprova.");
+				System.out.println("Si prega di inserire un intero nel range. Riprova.");
 			}
 		}
 		// removing next line...
