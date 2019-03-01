@@ -36,7 +36,8 @@ class RegistroUtentiTest {
 	 */
 	@Test
 	void testAdd() {
-		DatiUtente du = new DatiUtente("prova", Ruolo.STUDENTE);	
+		DatiUtente du = new DatiUtente("prova", Ruolo.STUDENTE);
+		// QUESTO TEST FALLISCE IN QUANTO L'UTENTE ANDREBBE PRIMA RIMOSSO DAL DB
 		assertEquals(Status.SUCCESS, registroTest.add(du));
 	}
 

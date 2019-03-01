@@ -1,7 +1,6 @@
 package uCOM;
 
 import java.io.IOException;
-
 import persistence.LocalDatabase;
 import util.ExitException;
 import util.MessagingException;
@@ -40,30 +39,31 @@ public class Sistema {
 	 */
 	public void startup()
 	{
-		LocalDatabase mysqldb = new LocalDatabase();
-		Thread t = new Thread() {
-			public void run( ) {
-				synchronized(mysqldb)
-				{					
-					try {
-						mysqldb.start();
-						mysqldb.notifyAll();
-					} catch (IOException | InterruptedException e) {
-						e.printStackTrace();
-					}	
-				}
-			}
-			
-		};
-		t.start();
-		synchronized(mysqldb)
-		{
-			try {
-				mysqldb.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}			
-		}
+// 		QUESTA PARTE E' STATA COMMENTATA IN QUANTO IL LOCALDATABASE E' STATO UTILIZZATO IN FASE DI SVILUPPO
+//		LocalDatabase mysqldb = new LocalDatabase();
+//		Thread t = new Thread() {
+//			public void run( ) {
+//				synchronized(mysqldb)
+//				{					
+//					try {
+//						mysqldb.start();
+//						mysqldb.notifyAll();
+//					} catch (IOException | InterruptedException e) {
+//						e.printStackTrace();
+//					}	
+//				}
+//			}
+//			
+//		};
+//		t.start();
+//		synchronized(mysqldb)
+//		{
+//			try {
+//				mysqldb.wait();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}			
+//		}
 		
 		loginSystem 	= new LoginSystem();
 		userSystem 		= new UserSystem();

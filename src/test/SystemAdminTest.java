@@ -29,6 +29,7 @@ class SystemAdminTest {
 	@Test
 	void testCreaUtente()
 	{
+		// QUESTO TEST FALLISCE PERCHE' L'UTENTE ANDREBBE PRIMA RIMOSSO DAL DB
 		Sistema.getIstanza().startup();
 		SystemAdmin saTest = new SystemAdmin("pippo");
 		DatiUtente duTest = new DatiUtente("pluto", Ruolo.STUDENTE);

@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
+ * Questa classe serve a lanciare il comando che fa partire il database in locale.
  * @author Pietro
- *
  */
 public class LocalDatabase {
 	
