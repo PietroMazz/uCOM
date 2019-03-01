@@ -13,6 +13,7 @@ public interface UserService {
 	
 	/**
 	 * Mostra il menù adeguato per l'utente
+	 * @return true se l'interfaccia è di tipo grafico, false se l'interfaccia è a linea di comando
 	 */
 	public boolean mostraMenu();
 	

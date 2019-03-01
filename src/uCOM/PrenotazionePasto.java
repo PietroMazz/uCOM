@@ -6,8 +6,11 @@ package uCOM;
  */
 public class PrenotazionePasto {
 	
+	@SuppressWarnings("unused")
 	private TipoPrenotazione tipo;
+	@SuppressWarnings("unused")
 	private Pasto			 pasto;
+	
 	/**
 	 * @param tp
 	 * @param p

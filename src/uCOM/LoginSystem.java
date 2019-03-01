@@ -2,7 +2,7 @@ package uCOM;
 
 import ui.LoginSwing;
 import ui.LoginUI;
-import ui.NotifyConsoleUI;
+import ui.Notifier;
 import util.ExitException;
 import util.Status;
 
@@ -23,16 +23,17 @@ public class LoginSystem {
 	/**
 	 * Avvia la schermata di login e permette l'inserimento dei dati
 	 * @return utente risultante dal login
+	 * @throws ExitException
 	 */
 	public Utente login () throws ExitException
 	{
 		DatiLogin 	datiLogin 	= loginUI.richiediDatiLogin();
 		
-		Ruolo ruoloUtente = verificaCredenziali(datiLogin);
+		Ruolo ruoloUtente		= verificaCredenziali(datiLogin);
 		
 		if (ruoloUtente == null) 
 		{
-			NotifyConsoleUI.notificaErrore("Dati login errati o impossibile accedere al momento");
+			Notifier.notificaErrore("Dati login errati o impossibile accedere al momento");
 			return null;
 		}
 	
@@ -53,7 +54,7 @@ public class LoginSystem {
 	}
 	
 	/**
-	 * Verifica le credenziali inserite dall'utente sul registro degli utenti autorizzati
+	 * UC9: Verifica le credenziali inserite dall'utente sul registro degli utenti autorizzati
 	 * @param dl - dati inseriti dall'utente
 	 * @return Restituisce il ruolo dell'utente, in caso di successo altrimenti rilancia un'eccezione
 	 */
@@ -65,13 +66,16 @@ public class LoginSystem {
 		
 		String user = dl.getUsername();
 		Ruolo ruolo = registroUtenti.getRoleForUser(user);
+		
 		if(ruolo == null) return null;
+		
 		return ruolo;
 	}
 
 	/**
-	 * Crea utente per il System Admin
-	 * @param du
+	 * UC8: Crea utente per il System Admin
+	 * @param du dati utente da aggiungere al Registro Utenti
+	 * @return esito operazione
 	 */
 	public Status creaUtente(DatiUtente du) {
 		return registroUtenti.add(du);		

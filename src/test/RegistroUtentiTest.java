@@ -2,12 +2,14 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import uCOM.DatiUtente;
 import uCOM.RegistroUtenti;
 import uCOM.Ruolo;
+import uCOM.Sistema;
 import util.Status;
 
 /**
@@ -17,6 +19,11 @@ import util.Status;
 class RegistroUtentiTest {
 
 	private RegistroUtenti registroTest;
+	
+	@Before
+	void startSystem(){
+		Sistema.getIstanza().startup();
+	}
 	
 	@BeforeEach
 	void startup()

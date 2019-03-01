@@ -8,6 +8,7 @@ import uCOM.Comunicazione;
 import uCOM.Pasto;
 import uCOM.PrenotazionePasto;
 import uCOM.Ruolo;
+import uCOM.Sistema;
 import uCOM.Studente;
 import uCOM.TipoPrenotazione;
 import util.Status;
@@ -17,9 +18,9 @@ import util.Status;
  *
  */
 class StudenteTest {
-
+	
 	/**
-	 * Test method for {@link uCOM.Studente#Studente(java.lang.String)}.
+	 * Test method for {@link uCOM.Studente#Studente(uCOM.Studente)}.
 	 */
 	@Test
 	void testStudente() {
@@ -33,6 +34,7 @@ class StudenteTest {
 	 */
 	@Test
 	void testInviaComunicazione() {
+		Sistema.getIstanza().startup();
 		Comunicazione cuTest = new Comunicazione("prova", "test");
 		Studente sTest = new Studente("prova");
 		assertEquals(Status.SUCCESS, sTest.inviaComunicazione(cuTest));
@@ -42,6 +44,7 @@ class StudenteTest {
 	 */
 	@Test
 	void testElaboraPrenotazione() {
+		Sistema.getIstanza().startup();
 		Pasto p = new Pasto("primo", "secondo");
 		PrenotazionePasto pp = new PrenotazionePasto(TipoPrenotazione.PRANZO, p);
 		

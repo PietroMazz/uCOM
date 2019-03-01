@@ -12,7 +12,7 @@ public abstract class Utente {
 		
 	/**
 	 * L'utente seleziona l'operazione da eseguire
-	 * @return TODO
+	 * @return true se il menù è di tipo grafico, false se il menù è a riga di comando
 	 */
 	public boolean scegliOperazione()
 	{

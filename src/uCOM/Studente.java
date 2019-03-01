@@ -2,7 +2,7 @@ package uCOM;
 
 import ui.InputConsoleUI;
 import ui.InputSwingUI;
-import ui.NotifyConsoleUI;
+import ui.Notifier;
 import util.Nomi;
 import util.Status;
 
@@ -27,44 +27,7 @@ public class Studente extends Utente {
 	}
 	
 	/**
-	 * Inizia l'operazione per inviare una comunicazione
-	 */
-	public void avviaComunicazione()
-	{
-		comunicazioneInCorso = creaComunicazione();
-		Status result 		 = inviaComunicazione(comunicazioneInCorso);	
-		
-		if(result == Status.SUCCESS) NotifyConsoleUI.notificaSuccesso();
-		else NotifyConsoleUI.notificaErrore("Impossibile inviare comunicazione");
-			
-		// cleanup
-		comunicazioneInCorso = null;		
-	}
-	
-	/**
-	 * Invia la comunicazione al Sistema
-	 * @return esito operazione
-	 */
-	public Status inviaComunicazione(Comunicazione c)
-	{
-		return sistema.elaboraComunicazione(comunicazioneInCorso);	
-		
-	}
-	
-	/**
-	 * Crea comunicazione con Input utente
-	 * @return restituisce comunicazione
-	 */
-	public Comunicazione creaComunicazione()
-	{		
-		String oggetto 	= InputConsoleUI.inserisciStringa(Nomi.OGGETTO);
-		String corpo 	= InputConsoleUI.inserisciStringa(Nomi.CORPO);
-		
-		return new Comunicazione(oggetto, corpo);		
-	}
-	
-	/**
-	 * Avvia l'operazione per aggiungere una Prenotazione Pasto al Sistema
+	 * UC1: Avvia l'operazione per aggiungere una Prenotazione Pasto al Sistema
 	 */
 	public void avviaPrenotazionePasto()
 	{
@@ -77,23 +40,27 @@ public class Studente extends Utente {
 		
 		Status result = elaboraPrenotazionePasto(prenotazioneInCorso);
 		
-		if(result == Status.SUCCESS) NotifyConsoleUI.notificaSuccesso();
-		else NotifyConsoleUI.notificaErrore("Impossibile elaborare prenotazione");
+		if(result == Status.SUCCESS) Notifier.notificaSuccesso();
+		else Notifier.notificaErrore("Impossibile elaborare prenotazione");
 			
 		// cleanup
 		prenotazioneInCorso = null;		
 	}
 	
 	/**
-	 * @param 
-	 * @return
+	 * UC1: Richiede al Sistema il menù offerto dal servizio mensa, per il tipo di prenotazione dato
+	 * @param tp tipo di prenotazione scelta
+	 * @return menù del servizio mensa
 	 */
-	public Status elaboraPrenotazionePasto(PrenotazionePasto pp) {
-		return sistema.elaboraPrenotazionePasto(pp);
+	public Menu indicaTipoPrenotazione(TipoPrenotazione tp) {
+		return sistema.indicaTipoPrenotazione(tp);
 	}
-
+	
 	/**
-	 * Richiede input per creare una PrenotazionePasto
+	 * UC1: Richiede input per creare una PrenotazionePasto
+	 * @param m menù ricevuto dal sistema
+	 * @param tp tipo di prenotazione selezionata
+	 * @return prenotazione pasto creata
 	 */
 	private PrenotazionePasto creaPrenotazionePasto(Menu m, TipoPrenotazione tp) {
 		boolean loop = true;
@@ -109,7 +76,7 @@ public class Studente extends Utente {
 			if(sPrimo == null) throw new Exception();
 			loop = false;
 			} catch(Exception e) {
-				NotifyConsoleUI.notificaErrore();
+				Notifier.notificaErrore();
 			}
 		}
 		
@@ -123,7 +90,7 @@ public class Studente extends Utente {
 				if(sSecondo == null) throw new Exception();
 				loop = false;
 			} catch(Exception e) {
-				NotifyConsoleUI.notificaErrore();
+				Notifier.notificaErrore();
 			}
 		}
 		
@@ -133,13 +100,57 @@ public class Studente extends Utente {
 	}
 
 	/**
-	 * Richiede al Sistema il menù offerto dal servizio mensa, per il tipo di prenotazione dato
-	 * @param tp
+	 * UC1 : Richiede al sistema l'elaborazione della prenotazione pasto
+	 * @param pp prenotazione pasto
+	 * @return esito operazione
 	 */
-	public Menu indicaTipoPrenotazione(TipoPrenotazione tp) {
-		return sistema.indicaTipoPrenotazione(tp);
+	public Status elaboraPrenotazionePasto(PrenotazionePasto pp) {
+		return sistema.elaboraPrenotazionePasto(pp);
 	}
-
+	
+	/**
+	 * UC4: Inizia l'operazione per inviare una comunicazione
+	 */
+	public void avviaComunicazione()
+	{
+		comunicazioneInCorso = creaComunicazione();
+		Status result 		 = inviaComunicazione(comunicazioneInCorso);	
+		
+		if(result == Status.SUCCESS) Notifier.notificaSuccesso();
+		else Notifier.notificaErrore("Impossibile inviare comunicazione");
+			
+		// cleanup
+		comunicazioneInCorso = null;		
+	}
+		
+	/**
+	 * UC4: Crea comunicazione con Input utente
+	 * @return restituisce comunicazione
+	 */
+	/**
+	 * @return
+	 */
+	public Comunicazione creaComunicazione()
+	{		
+		String oggetto 	= InputConsoleUI.inserisciStringa(Nomi.OGGETTO);
+		String corpo 	= InputConsoleUI.inserisciStringa(Nomi.CORPO);
+		
+		return new Comunicazione(oggetto, corpo);		
+	}
+	
+	/**
+	 * UC4:  Invia la comunicazione al Sistema
+	 * @param c comunicazione da inviare
+	 * @return esito operazione
+	 */
+	public Status inviaComunicazione(Comunicazione c)
+	{
+		return sistema.elaboraComunicazione(c);	
+	}
+	
+	/* (non-Javadoc)
+	 * @see uCOM.Utente#scegliOperazione()
+	 */
 	@Override
 	public boolean scegliOperazione()
 	{

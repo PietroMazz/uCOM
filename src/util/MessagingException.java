@@ -5,9 +5,10 @@ package util;
  *
  */
 @SuppressWarnings("serial")
-public class ExitException extends Exception {
-
-	public ExitException(String string) {
+public class MessagingException extends Exception {
+	
+	public MessagingException(String string) {
 		super(string);
 	}
+
 }

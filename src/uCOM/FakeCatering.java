@@ -15,6 +15,10 @@ public class FakeCatering {
 	private final String [] SECONDI = {"CARNE", "PESCE", "SALUMI MISTI", "HAMBURGER", "TOFU", "SALSICCIA"};
 	private final String [] CONTORNI = {"LATTUGA", "INSALATA ALLA NORMA", "CAPONATA", "PARMIGIANA", "SPINACI SALTATI"};
 	
+	/**
+	 * Genera random menù e lo restituisce sotto forma di array di stringhe
+	 * @return menù ordinato
+	 */
 	public String [] getMenu()
 	{
 		int randomPrimo = ThreadLocalRandom.current().nextInt(0, PRIMI		.length);
@@ -38,9 +42,14 @@ public class FakeCatering {
 		return s;
 	}
 	
+	/**
+	 * Simula l'invio di una prenotazione
+	 * @return 80% successo 20% fallimento
+	 */
 	public Status sendMealBooking()
 	{
-		return Status.SUCCESS;
+		if (ThreadLocalRandom.current().nextFloat() < 0.8) return Status.SUCCESS;
+		else return Status.FAIL;
 	}
 
 }

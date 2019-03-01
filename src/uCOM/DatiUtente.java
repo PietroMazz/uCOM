@@ -1,13 +1,29 @@
 package uCOM;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author Pietro
  *
  */
+@Entity
+@Table(name="Utenti")
 public class DatiUtente {
 	
+	@Id
+	@Column(name = "username", updatable = false, nullable = false)
 	private	String	username;
+	
+    @Enumerated
+    @Column(columnDefinition = "smallint")
 	private	Ruolo	ruolo;
+    
+    public DatiUtente(){};
 	
 	public DatiUtente(String username, Ruolo ruolo) {
 		super();

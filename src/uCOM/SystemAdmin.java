@@ -2,7 +2,7 @@ package uCOM;
 
 import ui.InputConsoleUI;
 import ui.InputSwingUI;
-import ui.NotifyConsoleUI;
+import ui.Notifier;
 import util.Nomi;
 import util.Status;
 
@@ -21,20 +21,22 @@ public class SystemAdmin extends Utente {
 	{
 		username 	= user;
 	}
-
 	
+	/**
+	 * UC8: Inizia l'operazione di aggiunta utente
+	 */
 	public void aggiungiUtente()
 	{
 		DatiUtente datiUtente = inserisciDatiUtente();
 		Status s = creaUtente(datiUtente);
 		
-		if(s == Status.SUCCESS) NotifyConsoleUI.notificaSuccesso();
-		else NotifyConsoleUI.notificaErrore("Impossibile aggiungere utente");
+		if(s == Status.SUCCESS) Notifier.notificaSuccesso();
+		else Notifier.notificaErrore("Impossibile aggiungere utente");
 	}
 
 	/**
-	 * 
-	 * @return
+	 * UC8: Inserimento dati utente
+	 * @return dati utente inseriti
 	 */
 	private DatiUtente inserisciDatiUtente() {
 		String username = InputConsoleUI.inserisciStringa(Nomi.USERNAME);
@@ -43,12 +45,20 @@ public class SystemAdmin extends Utente {
 		return du;
 	}
 	
+	/**
+	 * UC8: Indica al sistema di creare un utente
+	 * @param du dati utente da creare
+	 * @return esito operazione
+	 */
 	public Status creaUtente(DatiUtente du)
 	{
 		return sistema.creaUtente(du);
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see uCOM.Utente#scegliOperazione()
+	 */
 	@Override
 	public boolean scegliOperazione()
 	{
@@ -73,16 +83,13 @@ public class SystemAdmin extends Utente {
 		return true;
 	}
 
-
 	public String getUsername() {
 		return username;
 	}
 
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 
 	public Ruolo getRuolo() {
 		return ruolo;

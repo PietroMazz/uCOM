@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import uCOM.DatiUtente;
 import uCOM.Ruolo;
+import uCOM.Sistema;
 import uCOM.SystemAdmin;
 import util.Status;
 
@@ -28,6 +29,7 @@ class SystemAdminTest {
 	@Test
 	void testCreaUtente()
 	{
+		Sistema.getIstanza().startup();
 		SystemAdmin saTest = new SystemAdmin("pippo");
 		DatiUtente duTest = new DatiUtente("pluto", Ruolo.STUDENTE);
 		assertEquals(Status.SUCCESS, saTest.creaUtente(duTest) );	

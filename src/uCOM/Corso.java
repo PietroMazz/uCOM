@@ -15,9 +15,6 @@ public class Corso {
 		this.descrizione = descrizione;
 	}
 
-	/**
-	 * @return
-	 */
 	public String getNome() {
 		return nome;
 	}
@@ -26,7 +23,5 @@ public class Corso {
 	{
 		return descrizione;
 	}
-	
-	
 	
 }

@@ -1,6 +1,10 @@
 package uCOM;
 
+import java.io.IOException;
+
+import persistence.LocalDatabase;
 import util.ExitException;
+import util.MessagingException;
 import util.Status;
 
 /**
@@ -12,19 +16,12 @@ import util.Status;
  */
 public class Sistema {
 
+	// FACADE PATTERN
 	private LoginSystem 	loginSystem;
 	private UserSystem 		userSystem;	
 	private MessagingSystem messagingSystem;
 	private CateringService cateringService;
-	
-	private Sistema()
-	{
-		loginSystem 	= new LoginSystem();
-		userSystem 		= new UserSystem();
-		messagingSystem = new MessagingSystem();
-		cateringService = new FakeCateringAdapter();
-	}
-	
+		
 	// SINGLETON
 	private static Sistema istanza;
 	
@@ -43,6 +40,37 @@ public class Sistema {
 	 */
 	public void startup()
 	{
+		LocalDatabase mysqldb = new LocalDatabase();
+		Thread t = new Thread() {
+			public void run( ) {
+				synchronized(mysqldb)
+				{					
+					try {
+						mysqldb.start();
+						mysqldb.notifyAll();
+					} catch (IOException | InterruptedException e) {
+						e.printStackTrace();
+					}	
+				}
+			}
+			
+		};
+		t.start();
+		synchronized(mysqldb)
+		{
+			try {
+				mysqldb.wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}			
+		}
+		
+		loginSystem 	= new LoginSystem();
+		userSystem 		= new UserSystem();
+		messagingSystem = new MessagingSystem();
+		cateringService = new FakeCateringAdapter();
+		
+		
 		DatiUtente sysadmin = new DatiUtente("sysadmin", 	Ruolo.SYSTEMADMIN);
 		DatiUtente admin 	= new DatiUtente("admin", 		Ruolo.AMMINISTRATORE);
 		DatiUtente studente = new DatiUtente("student",		Ruolo.STUDENTE);
@@ -55,6 +83,7 @@ public class Sistema {
 	/**
 	 * Avvia il sistema, richiedendo l'autenticazione dell'utente
 	 * @return utente istanziato dal login
+	 * @throws ExitException
 	 */
 	public Utente login() throws ExitException
 	{
@@ -64,6 +93,7 @@ public class Sistema {
 	
 	/**
 	 * Avvia servizi per l'utente
+	 * @param ruoloUtente i servizi di sistema vengono avviati sulla base dell'utente utilizzatore della piattaforma
 	 */
 	public void avviaServizi(Ruolo ruoloUtente)
 	{
@@ -71,21 +101,71 @@ public class Sistema {
 	}
 	
 	/**
-	 * Processa la comunicazione da inviare
+	 * @return restituisce vero se l'interfaccia è di tipo grafico, falso se l'interfaccia è a riga di comando
+	 */
+	public boolean mostraMenu()
+	{
+		return userSystem.mostraMenu();
+	}
+	
+	/**
+	 * Effettua il logout: viene eliminata il parameto relativo al pattern Strategy dell'userSystem
+	 * TODO : aggiungere logout per gli altri sistemi, anche se vuoto
+	 */
+	public void logout() {
+		userSystem.logout();	
+	}
+	
+	//##################### CASI D'USO ##########################
+
+	/**
+	 * UC1: Ricevuto il tipo di prenotazione dall'utente, lo indica al servizio mensa
+	 * @param tp Tipo di prenotazione pasto
+	 * @return Restituisce il menù che viene fornito dal servizio mensa
+	 */
+	public Menu indicaTipoPrenotazione(TipoPrenotazione tp) {
+		return cateringService.indicaTipoPrenotazione(tp);
+	}
+
+	/**
+	 * UC1: Riceve la prenotazione pasto dallo Studente e la gira al servizio mensa 
+	 * @param pp prenotazione pasto
+	 * @return esito operazione
+	 */
+	public Status elaboraPrenotazionePasto(PrenotazionePasto pp) {
+		return cateringService.elaboraPrenotazione(pp);
+	}
+	
+	/**
+	 * UC4: Processa la Comunicazione che lo Studente sta inviando
 	 * @param c comunicazione da inviare
-	 * @return SUCCESS/FAIL
+	 * @return esito elaborazione
 	 */
 	public Status elaboraComunicazione(Comunicazione c)
 	{
 		try {			
 			messagingSystem.elaboraComunicazione(c);
-		} catch(Exception e)
+		} catch(MessagingException e)
 		{
 			return Status.FAIL;
 		}
 		return Status.SUCCESS;
 	}
 	
+	/**
+	 * UC5: Viene creato il corso su indicazione dell'Amministratore
+	 * @param c corso da creare
+	 * @return esito operazione
+	 */
+	public Status creaCorso(Corso c) {
+		return userSystem.creaCorso(c);
+	}
+	
+	/**
+	 * UC7: Processa l'avviso che l'Amministratore sta inviando
+	 * @param a avviso da elaborare
+	 * @return esito elaborazione
+	 */
 	public Status elaboraAvviso(Avviso a)
 	{
 		try {			
@@ -96,50 +176,13 @@ public class Sistema {
 		}
 		return Status.SUCCESS;
 	}
-	
-	
-	public boolean mostraMenu()
-	{
-		return userSystem.mostraMenu();
-	}
-
-
+		
 	/**
-	 * Crea utente per il SystemAdmin
-	 * @param du
+	 * UC8: Crea utente per il SystemAdmin
+	 * @param du dati utente da creare
+	 * @return esito operazione
 	 */
 	public Status creaUtente(DatiUtente du) {
 		return loginSystem.creaUtente(du);		
-	}
-
-	/**
-	 * 
-	 */
-	public void logout() {
-		userSystem.logout();
-		
-	}
-
-	/**
-	 * @param tp
-	 * @return
-	 */
-	public Menu indicaTipoPrenotazione(TipoPrenotazione tp) {
-		return cateringService.indicaTipoPrenotazione(tp);
-	}
-
-	/**
-	 * @param pp
-	 */
-	public Status elaboraPrenotazionePasto(PrenotazionePasto pp) {
-		return cateringService.elaboraPrenotazione(pp);
-	}
-
-	/**
-	 * @param c
-	 * @return
-	 */
-	public Status creaCorso(Corso c) {
-		return userSystem.creaCorso(c);
 	}
 }

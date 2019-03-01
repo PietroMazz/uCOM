@@ -18,25 +18,17 @@ public class Comunicazione {
 		return oggetto;
 	}
 
-
-
 	public void setOggetto(String oggetto) {
 		this.oggetto = oggetto;
 	}
-
-
 
 	public String getCorpo() {
 		return corpo;
 	}
 
-
-
 	public void setCorpo(String corpo) {
 		this.corpo = corpo;
 	}
-
-
 
 	public String toString()
 	{

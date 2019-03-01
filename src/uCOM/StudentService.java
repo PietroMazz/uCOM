@@ -11,10 +11,16 @@ public class StudentService implements UserService {
 		
 	private MenuUI menuUI = new MenuConsole(); 
 	
+	/* (non-Javadoc)
+	 * @see uCOM.UserService#start()
+	 */
 	public void start()
 	{
 	}
 	
+	/* (non-Javadoc)
+	 * @see uCOM.UserService#mostraMenu()
+	 */
 	public boolean mostraMenu()
 	{
 		if (!menuUI.mostraMenu())

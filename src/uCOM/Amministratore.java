@@ -1,7 +1,7 @@
 package uCOM;
 
 import ui.InputConsoleUI;
-import ui.NotifyConsoleUI;
+import ui.Notifier;
 import util.Nomi;
 import util.Status;
 
@@ -30,10 +30,11 @@ public class Amministratore extends Utente {
 	public void avviaAvviso()
 	{
 		avvisoInCorso = creaAvviso();
-		Status result 		 = inviaAvviso(avvisoInCorso);	
+		Status result = inviaAvviso(avvisoInCorso);	
 		
-		if(result == Status.SUCCESS) NotifyConsoleUI.notificaSuccesso();
-		else NotifyConsoleUI.notificaErrore("Impossibile inviare avviso");
+		// Notifica esito operazione
+		if(result == Status.SUCCESS) Notifier.notificaSuccesso();
+		else Notifier.notificaErrore("Impossibile inviare avviso");
 	}
 	
 	/**
@@ -66,22 +67,13 @@ public class Amministratore extends Utente {
 		Corso c = inserisciDatiCorso();
 		Status s = creaCorso(c);
 		
-		if(s == Status.SUCCESS) NotifyConsoleUI.notificaSuccesso();
-		else NotifyConsoleUI.notificaErrore("Impossibile aggiungere utente");
+		if(s == Status.SUCCESS) Notifier.notificaSuccesso();
+		else Notifier.notificaErrore("Impossibile aggiungere utente");
 	}
 	
 	/**
-	 * @param c
-	 * @return
-	 */
-	public Status creaCorso(Corso c) {
-		return sistema.creaCorso(c);
-	}
-
-
-	/**
 	 * Richiede input per creazione corso
-	 * @return
+	 * @return il corso da creare, ricevuti i dati in input
 	 */
 	private Corso inserisciDatiCorso() {
 		String nome = InputConsoleUI.inserisciStringa(Nomi.CORSO);
@@ -89,8 +81,19 @@ public class Amministratore extends Utente {
 		
 		return new Corso(nome, descrizione);
 	}
+	
+	/**
+	 * Dice al sistema di creare il corso
+	 * @param c corso da creare
+	 * @return esito operazione
+	 */
+	public Status creaCorso(Corso c) {
+		return sistema.creaCorso(c);
+	}
 
-
+	/* (non-Javadoc)
+	 * @see uCOM.Utente#scegliOperazione()
+	 */
 	@Override
 	public boolean scegliOperazione()
 	{
@@ -129,7 +132,7 @@ public class Amministratore extends Utente {
 	public Avviso getAvvisoInCorso() {
 		return avvisoInCorso;
 	}
-
+	
 	public void setAvvisoInCorso(Avviso avvisoInCorso) {
 		this.avvisoInCorso = avvisoInCorso;
 	}

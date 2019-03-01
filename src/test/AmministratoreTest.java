@@ -8,6 +8,7 @@ import uCOM.Amministratore;
 import uCOM.Avviso;
 import uCOM.Corso;
 import uCOM.Ruolo;
+import uCOM.Sistema;
 import util.Status;
 
 /**
@@ -33,13 +34,16 @@ class AmministratoreTest {
 	 */
 	@Test
 	void testInviaAvviso() {
+		Sistema.getIstanza().startup();
 		Avviso avv = new Avviso("prova", "test");
 		Amministratore a = new Amministratore("francesco");
 		assertEquals(Status.SUCCESS, a.inviaAvviso(avv));
 	}
 	
+	@Test
 	void testCreaCorso()
 	{
+		Sistema.getIstanza().startup();
 		Corso c = new Corso("ML", "TEST c");
 		Amministratore a = new Amministratore("francesco");
 		assertEquals(Status.SUCCESS, a.creaCorso(c));

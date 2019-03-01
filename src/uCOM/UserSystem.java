@@ -11,13 +11,16 @@ public class UserSystem {
 	private RegistroCorsi registro;
 	private UserService servizio;
 	
+	/**
+	 * 
+	 */
 	public UserSystem() {
 		registro = new RegistroCorsi();
 	}
 	
 	/**
 	 * Crea l'istanza del servizio sulla base dell'utente e lo avvia
-	 * @param ruoloUtente
+	 * @param ruoloUtente ruolo dell'utente
 	 */
 	public void avviaServizi(Ruolo ruoloUtente)
 	{
@@ -35,8 +38,21 @@ public class UserSystem {
 		servizio.start();
 	}
 	
+	/**
+	 * Mostra il menù di sistema
+	 * @return restituisce true se il menù è di tipo grafico, false se è di tipo a linea di comando
+	 */
 	public boolean mostraMenu() {
 		return servizio.mostraMenu();
+	}
+	
+	/**
+	 * UC5: Aggiunge corso al Registro Corsi
+	 * @param c
+	 * @return
+	 */
+	public Status creaCorso(Corso c) {
+		return registro.add(c);
 	}
 
 	/**
@@ -54,14 +70,4 @@ public class UserSystem {
 		this.servizio = servizio;
 	}
 
-	/**
-	 * @param c
-	 * @return
-	 */
-	public Status creaCorso(Corso c) {
-		return registro.add(c);
-	}
-
-	
-	
 }

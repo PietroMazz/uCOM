@@ -19,9 +19,9 @@ private Map<String, Corso> registro;
 	}
 	
 	/**
-	 * 
-	 * @param c 
-	 * @return Status: SUCCESS/FAIL
+	 * Aggiunge un corso al registro
+	 * @param c corso
+	 * @return esito operazione
 	 */
 	public Status add(Corso c)
 	{

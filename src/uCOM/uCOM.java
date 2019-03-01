@@ -3,16 +3,17 @@ package uCOM;
 import util.ExitException;
 
 /**
- * Classe del main, che avvia il software
- * 
  * @author Pietro
- * 
  */
 public class uCOM {
 
 		
+	/**
+	 * Metodo main del programma
+	 * @param args
+	 */
 	public static void main(String[] args)
-	{
+	{		
 		try
 		{
 			Sistema s = Sistema.getIstanza();
@@ -27,6 +28,7 @@ public class uCOM {
 				// Operazioni fino alla chiusura dell'App
 				if(user != null) user.scegliOperazione();	
 				
+				// Logout
 				s.logout();
 			}			
 		}

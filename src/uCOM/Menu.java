@@ -24,20 +24,9 @@ public class Menu {
 			autoIncrement++;
 		}
 	}
-	
-	public String toString()
-	{
-		Iterator<Entry<Integer, String>> it = menu.entrySet().iterator();
-		String s = new String("Menù\n");
-		while(it.hasNext())		
-		{
-			Map.Entry pair = (Map.Entry)it.next();
-	        s = s.concat(pair.getKey() + ") " + pair.getValue()+"\n");
-		}
-		return s;
-	}
 
 	/**
+	 * Restituisce il menù sotto forma di array di stringhe
 	 * @return
 	 */
 	public String[] getAsArray() {
@@ -45,10 +34,24 @@ public class Menu {
 	}
 
 	/**
-	 * 
+	 * Restituisce la stringa di una data chiave, prelevandola dalla Map
+	 * @param i chiave
+	 * @return stringa corrispondente alla chiave
 	 */
 	public String get(Integer i) {
 		return menu.get(i);
 	}
 
+	public String toString()
+	{
+		Iterator<Entry<Integer, String>> it = menu.entrySet().iterator();
+		String s = new String("Menù\n");
+		while(it.hasNext())		
+		{
+			@SuppressWarnings("rawtypes")
+			Map.Entry pair = (Map.Entry)it.next();
+			s = s.concat(pair.getKey() + ") " + pair.getValue()+"\n");
+		}
+		return s;
+	}
 }

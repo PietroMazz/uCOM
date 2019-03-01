@@ -8,6 +8,8 @@ import util.Status;
  */
 public class FakeCateringAdapter extends FakeCatering implements CateringService {
 
+	// ADAPTER PATTERN
+	
 	/* (non-Javadoc)
 	 * @see uCOM.CateringService#indicaTipoPrenotazione(uCOM.TipoPrenotazione)
 	 */
