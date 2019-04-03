@@ -1,0 +1,26 @@
+% Please add the following required packages to your document preamble:
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
+% \usepackage{longtable}
+% Note: It may be necessary to compile the document several times to get a multi-page table to line up properly
+\begin{longtable}{|l|l|}
+	\hline
+	\textbf{Nome caso d'uso} & UC5: Gestisce corso \\ \hline
+	\endfirsthead
+	%
+	\endhead
+	%
+	\textbf{Portata} & Piattaforma uCOM \\ \hline
+	\textbf{Livello} & Obiettivo utente (CRUD) \\ \hline
+	\textbf{Attore primario} & Amministratore \\ \hline
+	\textbf{\begin{tabular}[c]{@{}l@{}}Parti interessate \\ e Interessi\end{tabular}} & \begin{tabular}[c]{@{}l@{}}Amministratore: vuole poter gestire la creazione di un corso\\ svolto internamente al Campus\\ \\ Direzione Campus: vuole che la gestione dei corsi che si\\ svolgono all'interno del Campus siano gestite internamente dal\\ personale del Campus (Amministrazione)\end{tabular} \\ \hline
+	\textbf{Pre-condizioni} & L'Amministratore possiede un account sulla piattaforma \\ \hline
+	\textbf{Garanzia di successo} & \begin{tabular}[c]{@{}l@{}}Un nuovo corso è stato creato.\\ L'Amministratore ha ricevuto conferma dell'operazione.\end{tabular} \\ \hline
+	\textbf{\begin{tabular}[c]{@{}l@{}}Scenario principale \\ di successo\end{tabular}} & \begin{tabular}[c]{@{}l@{}}1. L'Amministratore effettua l'accesso.\\ 2. L'Amministratore avvia la creazione di un corso.\\ 3. L'Amministratore inserisce nome e descrizione del corso.\\ 4. L'Amministratore aggiunge il corso al Sistema.\\ 5. Il Sistema aggiunge il corso al proprio Registro Corsi.\\ 6. Il Sistema conferma la riuscita dell'operazione.\end{tabular} \\ \hline
+	\textbf{Estensioni} & \begin{tabular}[c]{@{}l@{}}*a. In qualsiasi momento.Il Sistema non è in grado di funzionare\\ correttamente in un dato momento.\\ \\ \quad1) Il Sistema segnala l’impossibilità a di eseguire l’azione. \\ \\ \quad- L'Amministratore riprova a eseguire l’azione dopo un certo \\ periodo di tempo.\\ \\ *b. In qualsiasi momento. Il Sistema entra in uno stato di errore \\ irrisolvibile. \\ \\ \quad1) Il Sistema termina la sessione, perdendo i dati. \\ \\ \quad- L'Amministratore deve ricominciare l’operazione.\\ \\ *c. In qualsiasi momento. L'Amministratore interrompe \\ l’operazione. \\ \\ \quad1) Il Sistema termina l’operazione.\\ \\ 2a. L'Amministratore avvia la lettura dei dati di un corso.\\ \\ \quad1) L'Amministratore inserisce il nome del Corso.\\ \\ \quad2) L'Amministratore richiede la lettura dei dati del corso.\\ \\ \quad3) Il Sistema preleva i dati del corso richiesto \\ dal Registro Corsi.\\ \\ \quad4) Il Sistema restituisce i dati del corso richiesto.\end{tabular} \\ \hline
+	\textbf{Estensioni} & \begin{tabular}[c]{@{}l@{}}2b. L'Amministratore avvia la modifica di un corso.\\ \\ \quad1) L'Amministratore inserisce le informazioni del corso\\ da modificare.\\ \\ \quad2) L'Amministratore modifica il corso.\\ \\ \quad3) Il Sistema aggiorna il corso sul Registro Corsi.\\ \\ \quad4) Il Sistema conferma la riuscita dell'operazione.\\ \\ 2c. L'Amministratore avvia l'eliminazione di un corso.\\ \\ \quad1) L'Amministratore inserisce le informazioni del corso\\ da eliminare.\\ \\ \quad2) L'Amministratore elimina il corso.\\ \\ \quad3) Il Sistema elimina il corso dal Registro Corsi.\\ \\ \quad4) Il Sistema conferma la riuscita dell'operazione.\\ \\ 3a. L'Amministratore inserisce informazioni non valide. \\ \\ \quad1) Il Sistema richiede nuova immissione dei dati \\ all'Amministratore\end{tabular} \\ \hline
+	\textbf{Requisiti speciali} & Nessuno \\ \hline
+	\textbf{\begin{tabular}[c]{@{}l@{}}Elenco delle varianti \\ tecnologiche e dei dati\end{tabular}} & \begin{tabular}[c]{@{}l@{}}3) L'inserimento delle informazioni può avvenire attraverso\\ metodi input diversi, come tastiera e mouse o un touchscreen.\end{tabular} \\ \hline
+	\textbf{Frequenza di ripetizione} & frequenza medio-bassa \\ \hline
+	\textbf{Varie} & \begin{tabular}[c]{@{}l@{}}Si potrebbero aggiungere nuove informazioni da memorizzare sul\\ Registro Corsi.\end{tabular} \\ \hline
+\end{longtable}

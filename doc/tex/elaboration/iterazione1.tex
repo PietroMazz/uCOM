@@ -1,0 +1,232 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% DOCUMENT PREAMBLE %%%
+\documentclass[12pt]{report}
+\usepackage[italian]{babel}
+
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage{placeins}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{nameref}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{uCOM}								
+% Title
+\author{Mazzaglia Pietro}						
+% Author
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\thetitle}
+\rhead{\currentname}
+\cfoot{\thepage}
+
+
+\begin{document}
+	
+	\huge \textbf{Elaborazione - Iterazione 1}
+	
+	\renewcommand{\thesection}{\arabic{section}}
+	
+	\normalsize
+	
+	%%%%%%%%%%%%%%%%%%%%%%%% PIANIFICAZIONE %%%%%%%%%%%%%%%%%%%%%%
+
+	\section{Introduzione}
+	
+	Durante le diverse iterazioni della fase di elaborazione vengono raffinati gli elaborati abbozzati durante la fase di Ideazione e si procede all'analisi e alla progettazione del software. \\
+	Durante ogni iterazione verrà inoltre implementata parte del prodotto finale, con i relativi test, per fornire al cliente versioni di prova del software corrette e funzionanti, seppure parziali.
+	
+	Gli obiettivi della prima iterazione sono:
+	\begin{itemize}
+		\item Analisi e progettazione, relativamente agli scenari dei casi d'uso \textit{UC4: Invia comunicazione} e \textit{UC9: Effettua accesso}
+		\item Implementazione (parziale) degli scenari di successo dei casi d'uso, e dei relativi test
+	\end{itemize}
+	
+	Sono stati scelti i casi d'uso citati, in quanto permettono di iniziare a sviluppare il nucleo del sistema \textit{uCOM}, di risolvere alcuni elementi ad alto rischio e di soddisfare alcuni tra i requisiti più importanti, tra cui sicurezza e affidabilità.
+	
+	\section{Pianificazione e gestione del progetto}
+	
+	Nella scelta degli obiettivi per questa iterazione sono stati organizzati i requisiti e le interazioni sulla base del rischio, della copertura e della criticità. 
+	
+	% Please add the following required packages to your document preamble:
+	% \usepackage{graphicx}
+	\begin{table}[!htb]
+		\centering
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{|l|l|l|}
+				\hline
+				\textbf{Priorità} & \textbf{Requisiti  (Casi d'uso o funzionalità)}                                                                          & \textbf{Commento}                                                                                                                                                                                                                                \\ \hline
+				Alta              & \begin{tabular}[c]{@{}l@{}}\textbf{Invia comunicazione}\\ \\ Invia avviso\\ \\ Gestisce utente\\ \\ \textbf{Effettua accesso}\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textbf{Nucleo della piattaforma, alta frequenza}\\ \\ Nucleo della piattaforma, alta frequenza\\ \\ Nucleo della piattaforma, sicurezza\\ \\ \textbf{Nucleo della piattaforma, sicurezza, coinvolta in tutte le funzioni}\end{tabular} \\ \hline
+				Media             & \begin{tabular}[c]{@{}l@{}}Prenota pasto\\ \\ Richiede libro\end{tabular}                                                & \begin{tabular}[c]{@{}l@{}}Frequenza elevata e più parti interessate ma sostituibile\\ \\ Frequenza elevata e più parti interessate ma sostituibile\end{tabular}                                                                                 \\ \hline
+				Bassa             & \begin{tabular}[c]{@{}l@{}}Iscrive a un corso\\ \\ Gestisce corso\\ \\ Gestisce iscrizione corso\end{tabular}            & \begin{tabular}[c]{@{}l@{}}Bassa frequenza e sostituibile\\ \\ Bassa frequenza e sostituibile\\ \\ Bassa frequenza e sostituibile \end{tabular}                                                                                                                                                \\ \hline
+			\end{tabular}%
+		}
+	\end{table}
+	
+	\newpage
+	
+	\section{Modello dei casi d'uso}
+	
+	Seguono l'aggiornamento dell'\textit{UC4} con correzioni e precisazioni rispetto alla fase di Ideazione e la descrizione dettagliata dell'\textit{UC9}.
+	
+	Inoltre si presentano i \textit{Diagrammi di sequenza di sistema} relativi agli scenari di successo e i \textit{Contratti delle operazioni}.
+	
+	\subsection{UC4: Invia comunicazione}
+
+	\input{../uc/uc4.tex}	
+
+	\subsection{UC9: Effettua accesso}
+
+	\input{../uc/uc9.tex}	
+	
+	
+	\newpage
+	
+	%%%%%%%%%%%%%% ANALISI ORIENTATA AGLI OGGETTI %%%%%%%%%%%%%%%%%
+	
+	\section{Modello di dominio}
+	
+	\subsection{Introduzione}
+	
+	Il \textit{Modello di dominio} deve fornire una rappresentazione visuale delle classi concettuali che costituiscono il contesto della piattaforma, con le relazioni tra di esse e le informazioni ad esse associate. 
+	
+	L'obiettivo è costituire un vero e proprio modello di business del progetto, formato da oggetti, attributi e associazioni reali.
+	
+	Sulla base dei casi d'uso finora analizzati (UC4 e UC9) sono state identificate le seguenti classi concettuali:
+	\begin{itemize}
+		\item \textbf{Comunicazione}
+		\item \textbf{Sistema}		
+		\item \textbf{Studente}
+		\item \textbf{Utente}
+	\end{itemize}
+
+	Tenendo conto di associazioni e attributi è stato ricavato il seguente Modello di Dominio:
+	
+	\begin{center}	
+	\includegraphics{./images/domain-I1.png}
+	\end{center}
+	
+	I dettagli relativi alle classi sono stati inseriti nel \textbf{Glossario}.
+	
+	\textbf{Nota:} Non sono state inserite classi o relazioni concettuali relative al login di UC9 in quanto gli elementi trattati non rappresentano oggetti o collegamenti reali, riguardanti il business di uCOM. Questo criterio sarà applicato anche nelle prossime iterazioni.
+	
+	\newpage
+	
+	\section{Diagrammi di sequenza di sistema e contratti delle operazioni}
+	
+	I diagrammi di sequenza di sistema mostrano gli eventi di I/O del sistema \textit{uCOM}, descrivendo in maniera chiara le interazioni tra attori e sistema.
+	
+	\subsection{UC4: Invia comunicazione}
+	\begin{center}
+		\includegraphics{./images/SSD_UC4.png}
+	\end{center}
+	
+	\newpage	
+		
+	\subsection{UC9: Effettua accesso}
+	
+	\begin{center}
+		\includegraphics{./images/SSD_UC9.png}
+	\end{center}
+
+		%%%%%%% CONTRATTI
+	
+	\noindent\fbox{%
+		\parbox{\textwidth}{%
+			\large \textbf{Contratto CO1: login}\\
+			
+			\normalsize
+			\textbf{Operazione:} \quad \quad login()\\
+			\textbf{Riferimenti:} \quad \quad Caso d'uso: Effettua accesso\\
+			\textbf{Pre-condizioni:} \quad Il Sistema è stato avviato\\
+			\textbf{Post-condizioni:} \quad - Un'istanza di Utente u viene creata\\
+			.\quad\quad\quad\quad\quad\quad\quad\quad\quad - Il Sistema viene associato all'istanza u \\
+			.\quad\quad\quad\quad\quad\quad\quad\quad\quad - Il \textit{ruolo} di u viene associato al Sistema
+		}%
+	}
+	
+	
+	
+	%%%%%%%%%%%% PROGETTAZIONE
+	\newpage
+	
+	
+	\section{Diagrammi di sequenza}
+	
+	I diagrammi di sequenza permettono di iniziare a progettare il software, partendo dall'analisi già effettuata. Essi mettono in evidenza le interazioni tra entità che sono già ottime candidate per diventari classi della programmazione orientata ad oggetti.
+	
+	\subsection{UC4: Invia comunicazione}
+	\begin{center}
+		\includegraphics{./images/InviaComunicazione.png}
+	\end{center}
+	
+	\subsection{UC4: Elabora comunicazione}
+	\begin{center}
+		\includegraphics[scale = 0.8]{./images/ElaboraComunicazione.png}
+	\end{center}
+	
+	\subsection{UC9: Effettua accesso}
+	\begin{center}
+		\includegraphics{./images/EffettuaAccesso.png}
+	\end{center}
+	
+	\newpage
+	
+	\section{Diagrammi delle classi e implementazione}
+	I \textit{Diagrammi di sequenza} forniscono una visione dinamica di quanto accade per ciascuna operazione di sistema. Il \textit{Diagramma delle classi} fornisce invece una visione degli aspetti statici, fornendo lo strumento della progettazione più vicino all'implementazione software.
+	
+	Il Diagramma delle classi che segue è il risultato di un processo di raffinazione, ottenuto applicando pattern GRASP e alcuni Design Pattern [GOF], a partire dagli elaborati dell'analisi e della progettazione finora svolte.
+	
+	La sua stesura è avvenuta in maniera quasi parallela all'implementazione software, per evidenziare fin da subito i punti critici e le difficoltà nella traduzione del diagramma in codice Java.	
+	
+	\begin{center}
+		\includegraphics[scale= 0.6]{./images/DCD-I1.png}
+	\end{center}
+
+	Sono stati adoperati i seguenti Design Pattern:
+	\begin{itemize}
+		\item Facade
+		\item Singleton
+		\item Strategy
+	\end{itemize}
+	
+	Il Sistema, in quanto \textit{Singleton}, possiede un'unica istanza con accesso globale. Su di esso è stato applicato il pattern \textit{Facade} per fornire un'interfaccia unificata per tutti i  sottosistemi di funzioni, accessibile dalle classi degli Utenti, senza aumentare a dismisura la complessità della classe di Sistema. L'applicazione di questo pattern ha permesso di diminuire l'accoppiamento (\textit{Low Coupling}) tra Utenti e sottosistemi, fornendo un \textit{Controller} per tutte le interazioni Utente-Sistema.
+	
+	Il pattern \textit{Strategy} è utilizzato nel contesto dell'UserService, interfaccia le cui classi concrete hanno il compito di mettere a disposizione dell'utente le funzionalità che gli spettano. Il suo comportamento varia proprio in base al Ruolo dell'utente, definito al momento dell'avvio dei servizi.
+	
+	Oltre a sviluppare tutte le classi del Diagramma sono state poste le basi per una UI flessibile (al momento funzionante da riga di comando, ma facilmente sostituibile con una GUI) e sono state implementate alcune classi utili per garantire consistenza nell'uso di Nomi e costanti (Status) all'interno del software.
+	
+	\newpage
+	
+	%%%%%%%%%%%% TESTING
+	
+	\section{Testing}
+	
+	Durante questa iterazione sono state implementate funzionalità di base che corrispondono solo parzialmente a situazioni reali.
+	
+	Alcuni test funzionali sono stati scritti, per il \textit{LoginSystem} e il \textit{MessagingSystem}, ma venendo restituiti valori di default dalle funzioni testate (senza applicare alcun tipo di condizione o verifica realistica) l'utilità di tali test è pressoché nulla.
+	
+	Tuttavia pensare a come testare il software è stato utile ad individuare alcune funzioni che andrebbero rese testabili più facilmente - come \textit{creaComunicazione} nella classe \textit{Studente} -, e a pensare a come testare eventuali errori nelle funzioni che restituiscono \textit{void} - si potrebbero creare delle eccezioni adhoc.
+	
+	Nelle prossime iterazioni verrà effettuato un refactoring di alcune funzioni per renderle testabili, verranno create eccezioni per la segnalazione degli errori e saranno implementati nuovi test, non appena l'implementazione sarà tale da poter testare nuovi scenari, o versioni più complete degli scenari attuali.
+	
+	Tutti i test per \textit{uCOM} sono stati scritti, e saranno prodotti anche nelle prossime iterazioni, utilizzando il framework \textit{JUnit 5}.
+	
+	
+	
+\end{document}

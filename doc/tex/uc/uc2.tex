@@ -1,0 +1,24 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{longtable}
+% Note: It may be necessary to compile the document several times to get a multi-page table to line up properly
+\begin{longtable}{|l|l|}
+	\hline
+	\textbf{Nome caso d'uso} & UC2: Richiede libro \\ \hline
+	\endfirsthead
+	%
+	\endhead
+	%
+	\textbf{Portata} & Piattaforma uCOM \\ \hline
+	\textbf{Livello} & Obiettivo utente \\ \hline
+	\textbf{Attore primario} & Studente \\ \hline
+	\textbf{\begin{tabular}[c]{@{}l@{}}Parti interessate \\ e Interessi\end{tabular}} & \begin{tabular}[c]{@{}l@{}}Studente: vuole richiedere un libro alla biblioteca\\ del Campus.\\ \\ Biblioteca: vuole ricevere la richiesta del libro da parte\\ dello studente, in conformità con la disponibilità dei libri\\ \\ Direzione Campus: vuole che i propri studenti possano\\ interagire con Servizi affiliati al Campus, come la biblioteca\end{tabular} \\ \hline
+	\textbf{Pre-condizioni} & Lo Studente possiede un account sulla piattaforma. \\ \hline
+	\textbf{Garanzia di successo} & Lo Studente ha ricevuto conferma dell'operazione. \\ \hline
+	\textbf{\begin{tabular}[c]{@{}l@{}}Scenario principale \\ di successo\end{tabular}} & \begin{tabular}[c]{@{}l@{}}1. Lo Studente effettua l'accesso\\ 2. Lo Studente avvia l'operazione di richiesta libro.\\ 3. Il Sistema mostra i libri disponibili\\ 4. Lo Studente inserisce il libro e la durata \\ prevista per la richiesta.\\ 5. Lo Studente invia la richiesta libro.\\ 6. Il Sistema elabora la richiesta.\\ 7. Il Sistema conferma la riuscita dell'operazione.\end{tabular} \\ \hline
+	\textbf{Estensioni} & \begin{tabular}[c]{@{}l@{}}*a. In qualsiasi momento.Il Sistema non è in grado di funzionare \\ correttamente in un dato momento.\\ \\  \quad   1) Il Sistema segnala l'impossibilità di eseguire l'azione.\\ \\   \quad  - Lo Studente riprova a eseguire l'azione dopo un certo periodo\\     di tempo.\end{tabular} \\ \hline
+	\textbf{Estensioni} & \begin{tabular}[c]{@{}l@{}}*b. In qualsiasi momento. Il Sistema entra in uno stato di errore\\ irrisolvibile.\\ \\   \quad  1) Il Sistema termina la sessione, perdendo i dati.\\ \\     \quad- Lo Studente deve ricominciare l'operazione.\\ \\ *c. In qualsiasi momento. Lo Studente interrompe l'operazione.\\ \\ \quad1) Il Sistema termina l'operazione.\\ \\ 4a. Lo Studente inserisce dati non validi.\\ \\     \quad1) Il Sistema richiede nuova immissione dei dati allo Studente.\\ \\ 6a. Il Sistema invia la richiesta a un Servizio Esterno.\\ \\     \quad1a) Il Servizio Esterno riceve correttamente la richiesta.\\  \\         \quad\quad2) Il Sistema conferma la riuscita dell'operazione.\\ \\     \quad1b) Il Servizio Esterno rigetta la richiesta.\\ \\         \quad\quad2a) Il Sistema va in errore temporaneo.\\ \\         \quad- Lo Studente può ritentare l'operazione dopo un certo\\           periodo di tempo.\\ \\         \quad\quad2b) Una regola di dominio è stata violata, dunque viene\\         restituito un messaggio di errore.\\ \\          \quad\quad- Potrebbe essere richiesto l'inserimento di nuovi dati.         \\ \\ 6b. Il Sistema gestisce internamente la richiesta.\end{tabular} \\ \hline
+	\textbf{Requisiti speciali} & \begin{tabular}[c]{@{}l@{}}- Lo Studente deve inserire dati che siano conformi ai libri\\ disponibili in Biblioteca\end{tabular} \\ \hline
+	\textbf{\begin{tabular}[c]{@{}l@{}}Elenco delle varianti \\ tecnologiche e dei dati\end{tabular}} & \begin{tabular}[c]{@{}l@{}}4) L'inserimento delle informazioni può avvenire attraverso\\ metodi input diversi, come tastiera e mouse o un touchscreen.\\ \\ 7b) L'elaborazione di sistema può avvenire internamente se il\\ servizio di gestione della biblioteca viene integrato in uCOM.\end{tabular} \\ \hline
+	\textbf{Frequenza di ripetizione} & media-alta \\ \hline
+	\textbf{Varie} & \begin{tabular}[c]{@{}l@{}}Si potrebbe prevedere un sistema che permetta l'inserimento\\ offline e l'elaborazione non appena il servizio ritorna disponibile.\\ \\ La richiesta viene registrata dal Sistema se viene elaborata\\ esternamente?\\ \\ Si possono prevedere meccanismi di recupero dell'istanza in\\ caso di errori gravi.\end{tabular} \\ \hline
+\end{longtable}

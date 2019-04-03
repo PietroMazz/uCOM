@@ -1,0 +1,247 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% DOCUMENT PREAMBLE %%%
+\documentclass[12pt]{report}
+\usepackage[italian]{babel}
+
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage{placeins}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{nameref}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{uCOM}								
+% Title
+\author{Mazzaglia Pietro}						
+% Author
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\thetitle}
+\rhead{\currentname}
+\cfoot{\thepage}
+
+
+\begin{document}
+	
+	\huge \textbf{Elaborazione - Iterazione 3}
+	
+	\renewcommand{\thesection}{\arabic{section}}
+	
+	\normalsize
+	
+	%%%%%%%%%%%%%%%%%%%%%%%% PIANIFICAZIONE %%%%%%%%%%%%%%%%%%%%%%
+
+	\section{Introduzione}
+	
+	Nota la seguente tabella di pianificazione:
+	
+	
+	% Please add the following required packages to your document preamble:
+	% \usepackage{graphicx}
+	\begin{table}[!htb]
+		\centering
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{|l|l|l|}
+				\hline
+				\textbf{Priorità} & \textbf{Requisiti  (Casi d'uso o funzionalità)}                                                                          & \textbf{Commento}                                                                                                                                                                                                                                \\ \hline
+				\textbf{Alta}              & \begin{tabular}[c]{@{}l@{}}\textbf{Invia comunicazione}\\ \\ \textbf{Invia avviso}\\ \\ \textbf{Gestisce utente}\\ \\ \textbf{Effettua accesso}\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textbf{Nucleo della piattaforma, alta frequenza}\\ \\ \textbf{Nucleo della piattaforma, alta frequenza}\\ \\ \textbf{Nucleo della piattaforma, sicurezza}\\ \\ \textbf{Nucleo della piattaforma, sicurezza, coinvolta in tutte le funzioni}\end{tabular} \\ \hline
+				\textbf{Media}             & \begin{tabular}[c]{@{}l@{}}\textbf{Prenota pasto}\\ \\ \textbf{Richiede libro}\end{tabular}                                                & \begin{tabular}[c]{@{}l@{}}\textbf{Frequenza elevata e più parti interessate ma sostituibile}\\ \\ \textbf{Frequenza elevata e più parti interessate ma sostituibile}\end{tabular}                                                                                 \\ \hline
+				Bassa             & \begin{tabular}[c]{@{}l@{}}Iscrive a un corso\\ \\ \textbf{Gestisce corso}\\ \\ Gestisce iscrizione corso\end{tabular}            & \begin{tabular}[c]{@{}l@{}}Bassa frequenza e sostituibile\\ \\ \textbf{Bassa frequenza e sostituibile}\\ \\ Bassa frequenza e sostituibile \end{tabular}                                                                                                                                                \\ \hline
+			\end{tabular}%
+		}
+	\end{table}
+	
+	
+	Gli obiettivi della terza iterazione sono:
+	\begin{itemize}
+		\item Analisi e progettazione, relativamente agli scenari dei casi d'uso \textit{UC1: Prenota Pasto}, \textit{UC2: Prenota libro} e \textit{UC5: Gestisce corso}.
+		\item Miglioramenti al software risultante dall'Iterazione 2, secondo i criteri evidenziati durante l'Iterazione 2
+		\item Implementazione di \textit{UC5} e di uno scenario d'uso di successo tra \textit{UC1} e \textit{UC2} 
+		\item Tentativo di integrazione di parti di interfaccia grafica per testare la flessibilità del software
+	\end{itemize}
+	
+	Alcune tra i requisiti più critici dell'applicazione sono già state trattati, tra cui Affidabilità, Sicurezza, Automatizzazione, dunque maggiore attenzione verrà posta in questa iterazione sull'Integrazione con altri sistemi e sul requisito di Flessibilità di \textit{uCOM}.
+	
+	\newpage
+	
+	\section{Modello dei casi d'uso}
+	
+	Seguono descrizioni dettagliate dei casi d'uso \textit{UC1}, \textit{UC2} e \textit{UC5}.
+	
+	Inoltre si presentano i \textit{Diagrammi di sequenza di sistema} relativi agli scenari di successo e i \textit{Contratti delle operazioni}.
+	
+	\subsection{UC1: Prenota pasto}
+
+	\input{../uc/uc1.tex}	
+
+	\newpage
+
+	\subsection{UC2: Richiede libro}
+
+	\input{../uc/uc2.tex}	
+
+	\newpage
+
+	\subsection{UC5: Gestisce corso}
+
+	Questo caso d'uso è di tipo CRUD (Create Read Update Delete). Ai fini dello sviluppo di una versione di prova di \textit{uCOM} sarà trattato solo uno dei quattro scenari, ovvero quello di Creazione del corso. Gli altri scenari saranno considerati come estensioni del caso d'uso.
+
+	\input{../uc/uc5.tex}	
+	
+	\newpage
+	
+	%%%%%%%%%%%%%% ANALISI ORIENTATA AGLI OGGETTI %%%%%%%%%%%%%%%%%
+	
+	\section{Modello di dominio}
+	
+	\subsection{Introduzione}
+	
+	Sulla base dei casi d'uso finora analizzati sono state identificate le seguenti classi concettuali:
+	\begin{itemize}
+		\item \textbf{Pasto}
+		\item \textbf{Prenotazione Pasto}		
+		\item \textbf{Libro}
+		\item \textbf{Richiesta Libro}
+		\item \textbf{Corso}
+		\item \textbf{Registro Corsi}
+	\end{itemize}
+
+	Tenendo conto di associazioni e attributi, a partire dallo schema dell'Iterazione 1, è stato ricavato il seguente Modello di Dominio:
+	
+	\begin{center}	
+	\includegraphics[scale=0.75]{./images/domain-I3.png}
+	\end{center}
+	
+	I dettagli relativi alle classi sono stati inseriti nel \textbf{Glossario}.
+	
+	\newpage
+	
+	\section{Diagrammi di sequenza di sistema e contratti delle operazioni}
+	
+	I diagramma di sequenza di sistema mostrano gli eventi di I/O del sistema \textit{uCOM}, descrivendo in maniera chiara le interazioni tra attori e sistema.
+	
+	\subsection{UC1: Prenota pasto}
+	\begin{center}
+		\includegraphics{./images/SSD_UC1.png}
+	\end{center}
+	
+	\newpage	
+		
+	\subsection{UC2: Richiede libro}
+	
+	\begin{center}
+		\includegraphics{./images/SSD_UC2.png}
+	\end{center}
+
+	\newpage
+
+	\subsection{UC5: Gestisce corso}
+
+	\begin{center}
+		\includegraphics{./images/SSD_UC5.png}
+	\end{center}
+
+		%%%%%%% CONTRATTI
+	
+	\noindent\fbox{%
+		\parbox{\textwidth}{%
+			\large \textbf{Contratto CO1: creaCorso}\\
+			
+			\normalsize
+			\textbf{Operazione:} \quad \quad creaCorso(corso)\\
+			\textbf{Riferimenti:} \quad \quad Caso d'uso: Gestisce corso\\
+			\textbf{Pre-condizioni:} \quad - Il Sistema è stato avviato.\\
+			.\quad\quad\quad\quad\quad\quad\quad\quad\quad - L'Amministratore ha inserito il nuovo Corso\\ 
+			\textbf{Post-condizioni:} \quad - Viene associata una voce del Registro Corsi\\
+			.\quad\quad\quad\quad\quad\quad\quad\quad\quad al nuovo corso inserito
+		}%
+	}
+	
+	
+	
+	%%%%%%%%%%%% PROGETTAZIONE
+	\newpage
+	
+	
+	\section{Diagrammi di sequenza}
+	
+	I diagrammi di sequenza permettono di iniziare a progettare il software, partendo dall'analisi già effettuata. Essi mettono in evidenza le interazioni tra entità che sono già ottime candidate per diventari classi della programmazione orientata ad oggetti.
+	
+	A seguire si illustrano i diagrammi di sequenza relativi ai casi d'uso UC1 e UC5 che saranno implementanti durante questa Iterazione.
+	
+	\subsection{UC1: Indica tipo prenotazione}
+	\begin{center}
+		\includegraphics[scale=0.8]{./images/IndicaTipoPrenotazione.png}
+	\end{center}
+
+	\subsection{UC1: Elabora prenotazione}
+	\begin{center}
+		\includegraphics[scale=0.8]{./images/ElaboraPrenotazione.png}
+	\end{center}
+	
+	\subsection{UC5: Aggiungi corso}
+	\begin{center}
+		\includegraphics{./images/AggiungiCorso.png}
+	\end{center}
+		
+	\subsection{UC8: Crea corso}
+	\begin{center}
+		\includegraphics[scale=0.8]{./images/CreaCorso.png}
+	\end{center}
+
+
+	\newpage
+	
+	\section{Diagrammi delle classi e implementazione}
+	
+	Il Diagramma delle classi che segue è il risultato di un processo di raffinazione, ottenuto applicando pattern GRASP e alcuni Design Pattern [GOF], a partire dagli elaborati dell'analisi e della progettazione finora svolte.
+	
+	La sua stesura è avvenuta in maniera quasi parallela alla programmazione, per evidenziare fin da subito i punti critici e le difficoltà nella traduzione del diagramma in codice Java.	
+	
+	\begin{center}
+				\includegraphics[scale= 0.6]{./images/DCD-I3.png}
+	\end{center}
+
+	Alla fine di questa iterazione sono stati implementati sei casi d'uso, di cui almeno 4 con alcune estensioni disponibili, oltre agli scenari di successo. Per quanto riguarda il caso d'uso \textit{UC1} andrebbero tenute in considerazione le regole di dominio (al momento solo una delle due è integrata nella piattaforma).
+	
+	L'integrazione di sistemi esterni, quale il servizio mensa,	ha permesso di applicare il design pattern [GOF] dell'Adapter, per la classe \textit{FakeCateringAdapter}, che rende il servizio di un \textit{FakeCatering} compatibile con l'interfaccia di Sistema \textit{CateringService}.
+	
+	Un simile approccio sarebbe stato applicato anche con il caso d'uso \textit{UC2: Richiede libro}.
+	
+	
+	
+	\newpage
+	
+	%%%%%%%%%%%% TESTING
+	
+	\section{Testing}
+	
+	Sono stati scritti oltre 20 test che verifichino il funzionamento dei metodi delle classi di sottosistema (quelle per cui \textit{System} fa da Facade).
+	
+	Per la suite di test a scatola nera sono stati scelti casi di uso normale (scenari di successo) e casi estremi, utilizzando input scelti in maniera specifica per il singolo test.
+	
+	Il resto del codice è stato testato manualmente cercando di coprire tutti i cammini percorribili.
+	
+	Con i test della suite JUnit si è raggiunta una copertura del 56\% del codice. Con i test manuali si è invece superato il 90\% di copertura.
+	
+	Nonostante ciò è possibile che il software celi ancora diversi errori, dovuti a valori di I/O errati (non ancora intercettati) o errori di riferimento ai dati. 
+	
+	
+	
+	
+\end{document}

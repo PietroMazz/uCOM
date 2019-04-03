@@ -1,0 +1,24 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{longtable}
+% Note: It may be necessary to compile the document several times to get a multi-page table to line up properly
+\begin{longtable}{|l|l|}
+	\hline
+	\textbf{Nome caso d'uso} & UC1: Prenota pasto \\ \hline
+	\endfirsthead
+	%
+	\endhead
+	%
+	\textbf{Portata} & Piattaforma uCOM \\ \hline
+	\textbf{Livello} & Obiettivo utente \\ \hline
+	\textbf{Attore primario} & Studente \\ \hline
+	\textbf{\begin{tabular}[c]{@{}l@{}}Parti interessate \\ e Interessi\end{tabular}} & \begin{tabular}[c]{@{}l@{}}Studente: vuole prenotare pasto alla mensa per il giorno\\ successivo.\\ \\ Servizio Mensa: vuole ricevere la prenotazione\\ dello studente, che deve essere coerente con il menù offerto.\\ \\ Direzione Campus: vuole che i propri studenti possano\\ interagire con Servizi Esterni affiliati al Campus, come la mensa\end{tabular} \\ \hline
+	\textbf{Pre-condizioni} & Lo Studente possiede un account sulla piattaforma. \\ \hline
+	\textbf{Garanzia di successo} & Lo Studente ha ricevuto conferma dell'operazione. \\ \hline
+	\textbf{\begin{tabular}[c]{@{}l@{}}Scenario principale \\ di successo\end{tabular}} & \begin{tabular}[c]{@{}l@{}}1. Lo Studente effettua l'accesso\\ 2. Lo Studente avvia l'operazione di prenotazione pasto.\\ 3. Lo Studente indica per quale pasto vuole prenotare\\ 4. Il Sistema mostra il menù relativo a tale pasto\\ 5. Lo Studente inserisce le proprie scelte.\\ 6. Lo Studente invia la prenotazione del pasto.\\ 7. Il Sistema elabora la prenotazione.\\ 8. Il Sistema conferma la riuscita dell'operazione.\end{tabular} \\ \hline
+	\textbf{Estensioni} & \begin{tabular}[c]{@{}l@{}}*a. In qualsiasi momento.Il Sistema non è in grado di funzionare\\ correttamente in un dato momento.\\ \\  \quad   1) Il Sistema segnala l'impossibilità di eseguire l'azione.\\ \\  \quad   - Lo Studente riprova a eseguire l'azione dopo un certo periodo\\     di tempo.\end{tabular} \\ \hline
+	\textbf{Estensioni} & \begin{tabular}[c]{@{}l@{}}*b. In qualsiasi momento. Il Sistema entra in uno stato di errore\\ irrisolvibile.\\ \\   \quad  1) Il Sistema termina la sessione, perdendo i dati.\\ \\     \quad- Lo Studente deve ricominciare l'operazione.\\ \\ *c. In qualsiasi momento. Lo Studente interrompe l'operazione.\\ \\ \quad 1) Il Sistema termina l'operazione.\\ \\ 3a. Lo Studente indica un'opzione non valida o possibile.\\ \\     \quad1) Il Sistema richiede nuova immissione dei dati allo Studente.\\ \\ 5a. Lo Studente inserisce informazioni non valide.\\ \\     \quad1) Il Sistema richiede nuova immissione dei dati allo Studente\\ \\ 7a. Il Sistema invia la prenotazione a un Servizio Esterno.\\ \\   \quad  1a) Il Servizio Esterno riceve correttamente la prenotazione.\\  \\         \quad\quad2) Il Sistema conferma la riuscita dell'operazione.\\ \\     \quad1b) Il Servizio Esterno rigetta la richiesta.\\ \\         \quad\quad2a) Il Sistema va in errore temporaneo.\\ \\         \quad\quad- Lo Studente può ritentare l'operazione dopo un certo\\           periodo di tempo.\\ \\         \quad\quad2b) Una regola di domio è stata violata, dunque viene\\         restituito un messaggio di errore.\\ \\          \quad\quad- Potrebbe essere richiesto l'inserimento di nuovi dati.         \\ \\ 7b. Il Sistema gestisce internamente la prenotazione.\end{tabular} \\ \hline
+	\textbf{Requisiti speciali} & \begin{tabular}[c]{@{}l@{}}- Lo Studente deve inserire dati che siano conformi al menù \\ offerto dal Servizio Mensa\end{tabular} \\ \hline
+	\textbf{\begin{tabular}[c]{@{}l@{}}Elenco delle varianti \\ tecnologiche e dei dati\end{tabular}} & \begin{tabular}[c]{@{}l@{}}3/5) L'inserimento delle informazioni può avvenire attraverso\\ metodi input diversi, come tastiera e mouse o un touchscreen.\\ \\ 7) La richiesta potrebbe venire rigettata dal servizio interno o \\ esterno in quanto una prenotazione è gia disponibile. In tal caso\\ si potrebbe proporre l'aggiornamento della \\prenotazione all'utente.\\ \\ 7b) L'elaborazione di sistema può avvenire internamente tramite\\ un Registro Prenotazioni relativo al giorno successivo, che viene\\ inoltrato quotidianamente al Servizio Mensa.\end{tabular} \\ \hline
+	\textbf{Frequenza di ripetizione} & giornaliera \\ \hline
+	\textbf{Varie} & \begin{tabular}[c]{@{}l@{}}Si potrebbe prevedere un sistema che permetta l'inserimento\\ offline e l'elaborazione non appena il servizio ritorna disponibile.\\ \\ La prenotazione viene registrata dal Sistema se viene elaborata\\ esternamente?\\ \\ Si possono prevedere meccanismi di recupero dell'istanza in\\ caso di errori gravi.\end{tabular} \\ \hline
+\end{longtable}

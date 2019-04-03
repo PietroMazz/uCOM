@@ -1,0 +1,35 @@
+\select@language {italian}
+\select@language {italian}
+\contentsline {section}{\numberline {1}Ideazione}{2}
+\contentsline {subsection}{\numberline {1.1}Introduzione}{2}
+\contentsline {subsection}{\numberline {1.2}Descrizione sintetica del progetto}{3}
+\contentsline {subsection}{\numberline {1.3}Visione}{4}
+\contentsline {subsubsection}{Cronologia revisioni}{4}
+\contentsline {subsubsection}{Introduzione}{4}
+\contentsline {subsubsection}{Posizionamento}{4}
+\contentsline {subsubsection}{Descrizione delle parti interessate}{6}
+\contentsline {subsubsection}{Descrizione generale del prodotto}{8}
+\contentsline {subsubsection}{Riepilogo delle caratteristiche di sistema}{9}
+\contentsline {subsubsection}{Altri requisiti e vincoli}{9}
+\contentsline {subsection}{\numberline {1.4}Glossario}{10}
+\contentsline {subsection}{\numberline {1.5}Modello dei casi d'uso}{12}
+\contentsline {subsubsection}{UC1: Prenota pasto}{12}
+\contentsline {subsubsection}{UC2: Richiede libro}{15}
+\contentsline {subsubsection}{UC3: Iscrive a un corso}{17}
+\contentsline {subsubsection}{UC4: Invia comunicazione}{19}
+\contentsline {subsubsection}{UC5: Gestisce corso}{21}
+\contentsline {subsubsection}{UC6: Gestisce iscrizione corso}{24}
+\contentsline {subsubsection}{UC7: Invia avviso}{26}
+\contentsline {subsubsection}{UC8: Gestisce utente}{29}
+\contentsline {subsubsection}{UC9: Effettua accesso}{31}
+\contentsline {subsection}{\numberline {1.6}Specifiche supplementari}{33}
+\contentsline {subsubsection}{Cronologia revisioni}{33}
+\contentsline {subsubsection}{Introduzione}{33}
+\contentsline {subsubsection}{Funzionalit\IeC {\`a}}{33}
+\contentsline {subsubsection}{Usabilit\IeC {\`a}}{33}
+\contentsline {subsubsection}{Affidabilit\IeC {\`a}}{34}
+\contentsline {subsubsection}{Sostenibilit\IeC {\`a}}{34}
+\contentsline {subsubsection}{Vincoli d'implementazione}{34}
+\contentsline {subsubsection}{Componenti Open Source}{35}
+\contentsline {subsubsection}{Interfacce}{35}
+\contentsline {subsubsection}{Regole di Dominio specifiche dell'applicazione}{36}

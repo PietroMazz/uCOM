@@ -1,0 +1,140 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% DOCUMENT PREAMBLE %%%
+\documentclass[12pt]{report}
+\usepackage[italian]{babel}
+
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage{placeins}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{nameref}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{uCOM}								
+% Title
+\author{Mazzaglia Pietro}						
+% Author
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\thetitle}
+\rhead{\currentname}
+\cfoot{\thepage}
+
+
+\begin{document}
+	
+	\huge \textbf{Elaborazione - Iterazione 4}
+	
+	\renewcommand{\thesection}{\arabic{section}}
+	
+	\normalsize
+	
+	%%%%%%%%%%%%%%%%%%%%%%%% PIANIFICAZIONE %%%%%%%%%%%%%%%%%%%%%%
+
+	\section{Introduzione}
+	
+	Nota la seguente tabella di pianificazione:
+	
+	
+	% Please add the following required packages to your document preamble:
+	% \usepackage{graphicx}
+	\begin{table}[!htb]
+		\centering
+		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{|l|l|l|}
+				\hline
+				\textbf{Priorità} & \textbf{Requisiti  (Casi d'uso o funzionalità)}                                                                          & \textbf{Commento}                                                                                                                                                                                                                                \\ \hline
+				\textbf{Alta}              & \begin{tabular}[c]{@{}l@{}}\textbf{Invia comunicazione}\\ \\ \textbf{Invia avviso}\\ \\ \textbf{Gestisce utente}\\ \\ \textbf{Effettua accesso}\end{tabular} & \begin{tabular}[c]{@{}l@{}}\textbf{Nucleo della piattaforma, alta frequenza}\\ \\ \textbf{Nucleo della piattaforma, alta frequenza}\\ \\ \textbf{Nucleo della piattaforma, sicurezza}\\ \\ \textbf{Nucleo della piattaforma, sicurezza, coinvolta in tutte le funzioni}\end{tabular} \\ \hline
+				\textbf{Media}             & \begin{tabular}[c]{@{}l@{}}\textbf{Prenota pasto}\\ \\ \textbf{Richiede libro}\end{tabular}                                                & \begin{tabular}[c]{@{}l@{}}\textbf{Frequenza elevata e più parti interessate ma sostituibile}\\ \\ \textbf{Frequenza elevata e più parti interessate ma sostituibile}\end{tabular}                                                                                 \\ \hline
+				\textbf{Bassa}             & \begin{tabular}[c]{@{}l@{}}\textbf{Iscrive a un corso}\\ \\ \textbf{Gestisce corso}\\ \\ \textbf{Gestisce iscrizione corso}\end{tabular}            & \begin{tabular}[c]{@{}l@{}}\textbf{Bassa frequenza e sostituibile}\\ \\ \textbf{Bassa frequenza e sost5ituibile}\\ \\ \textbf{Bassa frequenza e sostituibile} \end{tabular}                                                                                                                                                \\ \hline
+			\end{tabular}%
+		}
+	\end{table}
+	
+	Questa iterazione è l'ultima iterazione dell'elaborazione di uCOM, e non si occuperà di progettazione e implementazione di nuovi casi d'uso o scenari.
+	
+	Gli obiettivi della quarta iterazione sono:
+	\begin{itemize}
+		\item Analisi, relativamente ai casi d'uso \textit{UC3: Iscrive a un corso}, \textit{UC6: Gestisce iscrizione corso}
+		\item Refactoring e e documentazione codice (laddove mancante) dell'iterazione 3
+		\item Integrazione Database locale (MySQL) e ORM (\textit{Hibernate}) per il Registro Utenti utilizzato nel caso d'uso \textit{UC8: Gestisce utente}
+	\end{itemize}
+	
+	
+	\newpage
+	
+	\section{Modello dei casi d'uso}
+	
+	Seguono descrizioni dettagliate dei casi d'uso \textit{UC3} e \textit{UC6}.
+	
+	Inoltre si presentano i \textit{Diagrammi di sequenza di sistema} relativi agli scenari di successo.
+	
+	\subsection{UC3: Iscrive a un corso}
+
+	\input{../uc/uc3.tex}	
+
+	\newpage
+
+	\subsection{UC6: Gestisce iscrizione corso}
+
+	Questo caso d'uso è di tipo CRUD (Create Read Update Delete). Ai fini dello sviluppo di una versione di prova di \textit{uCOM} sarà trattato solo uno dei quattro scenari, ovvero quello di Creazione dell'iscrizione. Gli altri scenari saranno considerati come estensioni del caso d'uso.
+
+	\input{../uc/uc6.tex}	
+	
+	\newpage
+	
+	%%%%%%%%%%%%%% ANALISI ORIENTATA AGLI OGGETTI %%%%%%%%%%%%%%%%%
+	
+	\section{Modello di dominio}
+	
+	\subsection{Introduzione}
+	
+	Sulla base dei casi d'uso finora analizzati sono state identificate le seguenti classi concettuali:
+	\begin{itemize}
+		\item \textbf{Iscrizione}
+		\item \textbf{Registro Iscrizioni}
+	\end{itemize}
+
+	Tenendo conto di associazioni e attributi, a partire dallo schema dell'Iterazione 1, è stato ricavato il seguente Modello di Dominio:
+	
+	\begin{center}	
+	\includegraphics[scale=0.7]{./images/domain-I4.png}
+	\end{center}
+	
+	I dettagli relativi alle classi sono stati inseriti nel \textbf{Glossario}.
+	
+	\newpage
+	
+	\section{Diagrammi di sequenza di sistema}
+	
+	I diagramma di sequenza di sistema mostrano gli eventi di I/O del sistema \textit{uCOM}, descrivendo in maniera chiara le interazioni tra attori e sistema.
+	
+	\subsection{UC3: Iscrive a un corso}
+	\begin{center}
+		\includegraphics{./images/SSD_UC3.png}
+	\end{center}
+	
+		
+	\subsection{UC6: Gestisce iscrizione corso}
+	
+	\begin{center}
+		\includegraphics{./images/SSD_UC6.png}
+	\end{center}
+	
+	
+\end{document}

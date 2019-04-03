@@ -1,0 +1,122 @@
+\subsection{Specifiche supplementari}
+
+\subsubsection{Cronologia revisioni}
+
+
+\begin{table}[htb]
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		
+		\textbf{Versione} & \textbf{Data}       & \textbf{Descrizione} & \textbf{Autore}           \\ \hline
+		
+		1.0      & 15/02/2019 & Prima bozza & Pietro Mazzaglia \\ \hline
+		1.1      & 01/03/2019 & Revisione a fine Iterazione 4 & Pietro Mazzaglia \\ \hline
+	\end{tabular}
+\end{table}
+
+\subsubsection{Introduzione}
+
+In questo documento vengono inserite informazioni relative ai requisiti FURPS+ e ad alcuni attributi di qualità di \textit{uCOM}.
+
+\subsubsection{Funzionalità}
+
+\textit{Gestione degli errori}
+
+Tutti gli errori vanno segnalati all'utilizzatore e, ove possibile, risolti via software o grazie all'interazione di un Utente.
+
+\textit{Regole inseribili}
+
+In alcuni casi d'uso è possibile l'integrazione o l'interazione con sistemi e servizi esterni. 
+
+In tutti i casi d'uso potrebbero essere integrate regole di business, da rispettare per il corretto funzionamento della piattaforma nel suo contesto.
+
+\textit{Sicurezza}
+
+La piattaforma prevede sempre autenticazione. Le funzionalità disponibili a una categoria di utenti sono nascoste alle altre categorie.
+
+\subsubsection{Usabilità}
+
+\textit{Fattori umani}
+
+La piattaforma deve essere acccessibile anche per utenti con disabilità uditive e visive.
+
+Tutte le funzionalità devono essere disponibili con velocità e semplicità d'uso. Questi sono fattori che determinano in maniera importante la soddisfazione del cliente e dunque il successo della piattaforma.
+
+\subsubsection{Affidabilità}
+
+\textit{Possibilità di recupero}
+
+Il sistema deve prevedere la possibilità di recuperare la sessione di lavoro in seguito alla chiusura anomala dell'applicazione.
+
+Il sistema dovrebbe anche prevedere metodi di lavoro in locale, nel caso in cui non sia disponibile una connessione internet per completare le azioni richieste dall'utente.
+
+\subsubsection{Sostenibilità}
+
+\textit{Adattabilità}
+
+L'applicazione deve essere sviluppata in maniera flessibile, in quanto diverse regole di business potrebbero essere applicate da Campus diversi da quello richiedente. 
+
+Sviluppare un'applicazione flessibile permette di rivendere il software prodotto ad altre strutture, con uno sforzo di sviluppo minimo. 
+
+\textit{Configurabilità}
+
+Un Campus può richiedere la personalizzazione di diversi aspetti del software. Potrebbe venire richiesta la compatibilità con determinati servizi esterni.
+
+Si potrebbe richiedere anche l'integrazione di nuove lingue o di nuovi requisiti di usabilità.
+
+\subsubsection{Vincoli d'implementazione}
+
+E' consigliabile lo sviluppo attraverso tecnologie Java, in quanto garantiscono portabilità, ampia disponibilità di software open source e supporto a lungo termine.
+
+Un altro fattore determinante è la possibilità di sviluppare applicazioni mobili, riutilizzando la parte logica scritta in Java, e associandovi un'interfaccia per il sistema operativo Android (basato su Java).
+
+\subsubsection{Componenti Open Source}
+
+In generale, si raccomanda l'utilizzo di componenti tecnologiche Java open source per questo progetto.
+
+Si consiglia l'utilizzo delle seguenti componenti:
+
+- \textit{Hibernate}, framework per ORM (Object-relational mapping)
+
+- \textit{JUnit}, framework per il testing
+
+- \textit{MySQL}, o altro DBMS relazionale per il Database
+
+\subsubsection{Interfacce}
+
+\textit{Hardware}
+
+\begin{itemize}
+	\item Dispositivi mobile, touchscreen
+	\item Computer desktop e laptop
+\end{itemize}
+
+\textit{Interfacce software}
+
+Il sistema si integra con sistemi software esterni, come ad esempio:
+
+\begin{itemize}
+	\item Software per il servizio mensa
+	\item Software per la gestione della biblioteca
+	\item Provider e-mail per la gestione delle comunicazioni
+\end{itemize}
+
+\newpage
+
+\subsubsection{Regole di Dominio specifiche dell'applicazione}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+% \usepackage[normalem]{ulem}
+% \useunder{\uline}{\ul}{}
+\begin{table}[!htb]
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|l|l|l|l|}
+			\hline
+			\textbf{ID} & \textbf{Regola}                                                                                                                                                                              & \textbf{\begin{tabular}[c]{@{}l@{}}Possibilità di \\ cambiamenti\end{tabular}}                                                                       & \textbf{Origine} \\ \hline
+			REGOLA1     & \begin{tabular}[c]{@{}l@{}}Regola sul giorno di prenotazione dei pasti.\\ \\ E' possibile prenotare solo pasti per il giorno successivo.\end{tabular}                                        & \begin{tabular}[c]{@{}l@{}}Media.\\ \\ E' una buona\\ norma applicata\\ in diversi Campus.\end{tabular}                                              & Servizio mensa   \\ \hline
+			REGOLA2     & \begin{tabular}[c]{@{}l@{}}Regola su orario prenotazione dei pasti\\ \\ E' possibile prenotare pasti solo entro un determinato\\ orario (di solito le 19:00 / 7.00 pm)\end{tabular}          & \begin{tabular}[c]{@{}l@{}}Elevata.\\ \\ Norma applicata in\\ alcuni Campus.\\ Può variare l'ora.\end{tabular}                                       & Servizio mensa   \\ \hline
+			REGOLA3     & \begin{tabular}[c]{@{}l@{}}Regola durata prestito dei libri.\\ \\ E' possibile richiedere il prestito di un libro per un \\ intervallo di tempo limitato (di solito max 6 mesi)\end{tabular} & \begin{tabular}[c]{@{}l@{}}Media.\\ \\ Quasi tutte le \\ biblioteche applicano\\ regole come questa,\\ tuttavia con tempi\\ differenti.\end{tabular} & Biblioteca       \\ \hline
+		\end{tabular}%
+	}
+\end{table}
